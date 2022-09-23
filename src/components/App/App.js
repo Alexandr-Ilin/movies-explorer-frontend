@@ -1,4 +1,5 @@
 // import React from 'react';
+// eslint-disable-next-line no-unused-vars
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 // import NotFoundPage from '../NotFoundPage/NotFounPage';
@@ -13,7 +14,6 @@ function App() {
     <div className="App">
       <Routes>
         <Route
-          exact
           path="/"
           element={(
             <>

@@ -1,6 +1,6 @@
 import './AboutMe.css';
 import SectionTitle from '../SectionTitle/SectionTitle';
-import foto from '../../../images/foto.png';
+import foto from '../../images/foto.png';
 
 function AboutMe() {
   return (

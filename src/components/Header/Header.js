@@ -1,9 +1,9 @@
 import './Header.css';
 import { useLocation } from 'react-router-dom';
 import Logo from '../Logo/Logo';
-import Navigation from './Navigation/Navigation';
-import AuthNavigation from './AuthNavigation/AuthNavigation';
-import Account from './Account/Account';
+import Navigation from '../Navigation/Navigation';
+import AuthNavigation from '../AuthNavigation/AuthNavigation';
+import Account from '../Account/Account';
 
 function Header() {
   const currentPath = useLocation().pathname;

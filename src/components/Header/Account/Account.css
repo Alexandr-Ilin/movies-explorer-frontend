@@ -1,0 +1,21 @@
+.account-link {
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  background-image: url(../../../images/account-icon.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+  padding-right: 35px;
+  margin-left: 50px;
+  transition: opacity .4s linear;
+}
+
+.account-link:hover {
+  opacity: .8;
+}
+
+.account-link_active {
+  font-weight: 400;
+}

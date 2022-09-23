@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 70px;
+}
+
+.header__link-container {
+  display: flex;
+}
+
+.header_type_landing {
+  background: #f3c1f8;
+}

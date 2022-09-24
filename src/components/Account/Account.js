@@ -4,7 +4,7 @@ import './Account.css';
 function Account() {
   return (
     <NavLink
-      to=""
+      to="/profile"
       className="account-link"
       activeClassName="account-link account-link_active"
     >

@@ -12,18 +12,18 @@ function Register() {
         <Logo />
         <h1 className="register-page__title">Добро пожаловать!</h1>
         <form className="form-register" onSubmit={onSubmit}>
-          <label className="form-login__label" htmlFor="name">
+          <label className="form-register__label" htmlFor="name">
             Имя
             <input
               name="name"
               id="name"
-              className="form-login__input"
+              className="form-register__input"
               type="text"
               minLength="2"
               maxLength="30"
               required
             />
-            <span className="form-login__error">name-error</span>
+            <span className="form-register__error">name-error</span>
           </label>
           <label className="form-register__label" htmlFor="Email">
             Email

@@ -1,0 +1,133 @@
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1280px;
+  padding: 74px 70px 70px;
+  box-sizing: border-box;
+}
+
+.profile-page__title {
+  margin-block: 0;
+  text-align: center;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 500;
+  margin-bottom: 107px;
+}
+
+.form-profile {
+  width: 470px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-profile__user-data {
+  display: flex;
+  width: 100%;
+}
+
+ .form-profile__input-name {
+  width: 60px;
+  margin-block: 0;
+  align-self: center;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.form-profile__error {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  color: #ff4062;
+  display: block;
+  text-align: right;
+  width: 100%;
+}
+
+.form-profile__error_type_name {}
+.form-profile__error_type_api {}
+
+.form-profile__error_type_email {
+  margin-bottom: 110px;
+}
+
+.form-profile__error-serv {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  color: #ff4062;
+  margin-bottom: 20px;
+}
+
+.form-profile__input {
+  padding: 0;
+  border: none;
+  border: 1px solid #e8e8e8;
+  width: 410px;
+  height: 46px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+}
+
+.form-profile__user-data {
+  width: 100%;
+}
+
+.form-profile__input_type_name {}
+.form-profile__input_type_email {}
+
+.form-profile__submit {
+  width: 100%;
+  background: #000;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  border-radius: 3px;
+  color: #fff;
+  min-height: 45px;
+  cursor: pointer;
+  transition: opacity .4s linear;
+  padding: 0;
+  border: none;
+}
+
+.form-profile__submit:hover {
+  opacity: .8;
+}
+
+.profile-page__edit {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity .4s linear;
+  margin-bottom: 16px;
+}
+
+.profile-page__edit:hover {
+  opacity: .8;
+}
+
+.profile-page__signout {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity .4s linear;
+  color: #ff4062;
+}
+
+.profile-page__signout:hover {
+  opacity: .8;
+}

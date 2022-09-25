@@ -20,6 +20,8 @@
   justify-content: space-between;
   padding: 14px 12px;
   box-sizing: border-box;
+  box-shadow: 0 16px 24px 0 #0000000D;
+
 }
 
 .movie-card__title {

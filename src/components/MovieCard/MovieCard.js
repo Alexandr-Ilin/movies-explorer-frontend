@@ -22,13 +22,20 @@ function MovieCard() {
               <h2 className="movie-card__title">33 слова о дизайне</h2>
               <p className="movie-card__duration">1ч53м</p>
             </div>
+            {/* <MovieButton /> */}
+
+            {currentPath === '/saved-movies'
+              ? (
+                <button
+                  type="button"
+                  onClick={handleClick}
+                  className="movie-card__remove"
+                  aria-label="Удалить из сохранённых"
+                />
+              )
+              : <MovieButton />}
             {currentPath === '/movies' && <MovieButton />}
-            <button
-              type="button"
-              onClick={handleClick}
-              className="movie-card__remove"
-              aria-label="Удалить из сохранённых"
-            />
+
           </figcaption>
         </figure>
       </article>

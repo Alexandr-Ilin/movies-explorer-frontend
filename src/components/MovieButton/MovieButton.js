@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './MovieButton.css';
 
-function MovieCard() {
+function MovieButton() {
   const [isLike, setIsLike] = useState(false);
 
   function handleClick() {
@@ -17,4 +17,4 @@ function MovieCard() {
   );
 }
 
-export default MovieCard;
+export default MovieButton;

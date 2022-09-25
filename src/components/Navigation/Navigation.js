@@ -16,8 +16,8 @@ function Navigation() {
         </li>
         <li className="links__item">
           <NavLink
-            to="/SavedMovies"
-            className={`links__link ${currentPath === '/SavedMovies' && 'links__link_active'}`}
+            to="/saved-movies"
+            className={`links__link ${currentPath === '/saved-movies' && 'links__link_active'}`}
           >
             Сохранённые фильмы
           </NavLink>

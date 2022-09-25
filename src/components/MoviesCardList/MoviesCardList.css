@@ -41,6 +41,12 @@
   position: absolute;
   top: 6px;
   right: 6px;
+  cursor: pointer;
+  transition: opacity .4s linear;
+}
+
+.movie-list__submit {
+  opacity: .8;
 }
 
 .movie-list__enable-button {
@@ -48,6 +54,7 @@
   height: 20px;
   padding: 0;
   border: none;
+  transition: opacity .4s linear;
   border-radius: 16px;
   padding: 2px 2px;
   box-sizing: border-box;
@@ -61,6 +68,8 @@
   content: "";
   width: 16px;
   height: 16px;
+  cursor: pointer;
+  transition: opacity .4s linear;
   border-radius: 50%;
   background: #2BE080;
   position: relative;
@@ -68,9 +77,14 @@
   display: block;
 }
 
+.movie-list__enable-button:hover::before {
+  opacity: .8;
+}
+
 .movie-list__disable-button {
   width: 36px;
   height: 20px;
+  cursor: pointer;
   padding: 0;
   border: none;
   border-radius: 16px;
@@ -91,6 +105,11 @@
   position: relative;
   left: 0px;
   display: block;
+  transition: opacity .4s linear;
+}
+
+.movie-list__disable-button:hover::before {
+  opacity: .8;
 }
 
 .movie-list__radio-wrapper {

@@ -10,6 +10,8 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import MovieCard from '../MovieCard/MovieCard';
+import MovieButton from '../MovieButton/MovieButton';
 
 // const history = useNavigate();
 
@@ -28,8 +30,12 @@ function App() {
           )}
         />
         <Route
+          path="/cardbutton"
+          element={<MovieButton />}
+        />
+        <Route
           path="/cardlist"
-          element={<MoviesCardList />}
+          element={<MovieCard />}
         />
         <Route
           path="/signin"

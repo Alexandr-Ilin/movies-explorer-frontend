@@ -10,6 +10,7 @@
 .movie-card__image {
   display: block;
   object-fit: cover;
+  width: 100%;
 }
 
 .movie-card__info {
@@ -36,6 +37,23 @@
   line-height: 13px;
   font-weight: 400;
   color: #a0a0a0;
+}
+
+.movie-card__remove {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+  background-image: url(../../images/cross.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  transition: opacity .4s linear;
+  cursor: pointer;
+  padding: 0;
+}
+
+.movie-card__remove:hover {
+  opacity: .8;
 }
 
 .movie-item {

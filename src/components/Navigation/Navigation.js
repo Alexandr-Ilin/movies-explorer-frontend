@@ -1,24 +1,23 @@
 import './Navigation.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 function Navigation() {
+  const currentPath = useLocation().pathname;
   return (
     <nav>
       <ul className="links">
         <li className="links__item">
           <NavLink
-            to=""
-            className="links__link"
-            activeClassName="links__link links__link_active"
+            to="/movies"
+            className={`links__link ${currentPath === '/movies' && 'links__link_active'}`}
           >
             Фильмы
           </NavLink>
         </li>
         <li className="links__item">
           <NavLink
-            to=""
-            className="links__link"
-            activeClassName="links__link links__link_active"
+            to="/SavedMovies"
+            className={`links__link ${currentPath === '/SavedMovies' && 'links__link_active'}`}
           >
             Сохранённые фильмы
           </NavLink>

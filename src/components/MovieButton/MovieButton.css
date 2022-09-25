@@ -1,0 +1,21 @@
+.movie-button {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  border-color: #fff;
+  border-style: solid;
+  transition: background .4s linear;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.09);
+}
+
+.movie-button_like {
+  background: #2BE080;
+}
+
+.movie-button:hover {
+  background: #2BE08050;
+}
+

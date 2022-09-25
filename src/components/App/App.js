@@ -9,6 +9,7 @@ import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 // const history = useNavigate();
 
@@ -27,6 +28,10 @@ function App() {
           )}
         />
         <Route
+          path="/cardlist"
+          element={<MoviesCardList />}
+        />
+        <Route
           path="/signin"
           element={<Login />}
         />
@@ -37,6 +42,14 @@ function App() {
         <Route
           path="/profile"
           element={<Profile />}
+        />
+        <Route
+          path="/movies"
+          element={<MoviesCardList />}
+        />
+        <Route
+          path="/saved-movies"
+          element={<MoviesCardList />}
         />
         <Route
           path="*"

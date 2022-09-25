@@ -1,6 +1,4 @@
-// import React from 'react';
-// eslint-disable-next-line no-unused-vars
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import NotFoundPage from '../NotFoundPage/NotFounPage';
 import Main from '../Main/Main';
@@ -9,11 +7,10 @@ import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import MovieCard from '../MovieCard/MovieCard';
-import MovieButton from '../MovieButton/MovieButton';
-
-// const history = useNavigate();
+// import MovieCard from '../MovieCard/MovieCard';
+// import MovieButton from '../MovieButton/MovieButton';
+import SearchForm from '../SearchForm/SearchForm';
+import MovieCardList from '../MovieCardList/MovieCardList';
 
 function App() {
   return (
@@ -31,11 +28,11 @@ function App() {
         />
         <Route
           path="/cardbutton"
-          element={<MovieButton />}
+          element={<SearchForm />}
         />
         <Route
           path="/cardlist"
-          element={<MovieCard />}
+          element={<MovieCardList />}
         />
         <Route
           path="/signin"
@@ -51,18 +48,17 @@ function App() {
         />
         <Route
           path="/movies"
-          element={<MoviesCardList />}
+          element={<SearchForm />}
         />
         <Route
           path="/saved-movies"
-          element={<MoviesCardList />}
+          element={<SearchForm />}
         />
         <Route
           path="*"
           element={<NotFoundPage />}
         />
       </Routes>
-      {/* <NotFoundPage /> */}
     </div>
   );
 }

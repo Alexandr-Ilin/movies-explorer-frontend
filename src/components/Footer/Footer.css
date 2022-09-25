@@ -17,11 +17,13 @@
   border-bottom: 1px solid #e8e8e8;
   padding-bottom: 20px;
 }
+
 .footer__container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
 .footer__copyright {
   font-size: 13px;
   line-height: 16px;
@@ -29,6 +31,7 @@
   color: #000;
   margin-block: 0;
 }
+
 .footer__links-list {
   list-style: none;
   padding-inline-start: 0;
@@ -38,9 +41,7 @@
   min-width: 182px;
   margin-block: 0;
 }
-.footer__links-item {
 
-}
 .footer__link {
   text-decoration: none;
   font-size: 13px;

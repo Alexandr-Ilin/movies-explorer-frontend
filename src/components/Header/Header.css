@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 70px;
+  padding: 18px 5.5%;
   box-sizing: border-box;
   width: 100%;
 }
@@ -13,4 +13,10 @@
 
 .header_type_landing {
   background: #f3c1f8;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 18px 30px;
+  }
 }

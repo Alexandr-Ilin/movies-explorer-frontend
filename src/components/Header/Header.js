@@ -8,7 +8,7 @@ import Account from '../Account/Account';
 // function Header({ isLogin }) {
 function Header() {
   const currentPath = useLocation().pathname;
-  const isLogin = true;
+  const isLogin = false;
   return (
     <header
       className={`header ${currentPath === '/' ? 'header_type_landing' : ''}`}

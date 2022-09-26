@@ -24,7 +24,7 @@ function AboutMe() {
             href="https://github.com/Alexandr-Ilin"
             target="blank"
           >
-            Git
+            Github
           </a>
         </div>
         <img src={foto} className="about-me__foto" alt="Фото студента" />

@@ -14,7 +14,7 @@ function Footer() {
             <a className="footer__link" href="https://practicum.yandex.ru/" target="blank">Яндекс.Практикум</a>
           </li>
           <li className="footer__links-item">
-            <a className="footer__link" href="https://github.com" target="blank">Git</a>
+            <a className="footer__link" href="https://github.com" target="blank">Github</a>
           </li>
         </ul>
       </div>

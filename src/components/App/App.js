@@ -11,6 +11,7 @@ import Profile from '../Profile/Profile';
 // import MovieButton from '../MovieButton/MovieButton';
 import SearchForm from '../SearchForm/SearchForm';
 import MovieCardList from '../MovieCardList/MovieCardList';
+import Duration from '../duracion_grid/duration';
 
 function App() {
   return (
@@ -33,6 +34,10 @@ function App() {
         <Route
           path="/cardlist"
           element={<MovieCardList />}
+        />
+        <Route
+          path="/duration"
+          element={<Duration />}
         />
         <Route
           path="/signin"

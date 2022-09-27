@@ -15,8 +15,14 @@
   background: #f3c1f8;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1279px) {
   .header {
     padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding: 18px 14px;
   }
 }

@@ -5,7 +5,6 @@ import Navigation from '../Navigation/Navigation';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
 import Account from '../Account/Account';
 
-// function Header({ isLogin }) {
 function Header() {
   const currentPath = useLocation().pathname;
   const isLogin = false;

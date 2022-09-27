@@ -22,9 +22,28 @@
   opacity: .8;
 }
 
-.auth-links__link_registration {
+.auth-links__link_login {
   color: #fff;
   background-color: #000;
-  padding: 8px 20px;
   border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 76px;
+  height: 32px;
+}
+
+@media screen and (max-width: 767px) {
+  .auth-links__link {
+    font-size: 10px;
+    padding: 0;
+  }
+  .auth-links__link_login {
+    margin-left: 15px;
+    width: 54px;
+    height: 26px;
+  }
+  .auth-links {
+    justify-content: flex-end;
+  }
 }

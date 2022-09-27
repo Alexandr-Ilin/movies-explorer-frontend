@@ -3,7 +3,7 @@ import './AboutProject.css';
 function AboutProject() {
   return (
     <section className="about" id="about">
-      <h2 className="about__title">О проекте</h2>
+      <h1 className="about__title">О проекте</h1>
       <div className="about__container">
         <div className="about__project">
           <p className="about__project-title">Дипломный проект включал 5 этапов</p>
@@ -23,23 +23,30 @@ function AboutProject() {
         </div>
       </div>
       <div className="about__container-duration">
-        <div className="about__back-end-duration">
-          <p className="about__time about__time_type_black">1 неделя</p>
-          <p className="about__process">
-            Back-end
-          </p>
-        </div>
-        <div className="about__front-end-duration">
-          <p className="about__time about__time_type_gray">
-            4 недели
-          </p>
-          <p className="about__process">
-            Front-end
-          </p>
-        </div>
+        <p className="about__time about__time_type_black">1 неделя</p>
+        <p className="about__time about__time_type_gray">4 недели</p>
+        <p className="about__time">Back-end</p>
+        <p className="about__time">Front-end</p>
       </div>
     </section>
   );
 }
 
 export default AboutProject;
+
+// <div className="about__container-duration">
+//   <div className="about__back-end-duration">
+//     <p className="about__time about__time_type_black">1 неделя</p>
+//     <p className="about__process">
+//       Back-end
+//     </p>
+//   </div>
+//   <div className="about__front-end-duration">
+//     <p className="about__time about__time_type_gray">
+//       4 недели
+//     </p>
+//     <p className="about__process">
+//       Front-end
+//     </p>
+//   </div>
+// </div>

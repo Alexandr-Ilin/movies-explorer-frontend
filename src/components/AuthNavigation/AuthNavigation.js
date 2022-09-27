@@ -9,7 +9,7 @@ function AuthNavigation() {
           <NavLink to="/signup" className="auth-links__link">Регистрация</NavLink>
         </li>
         <li className="auth-links__item">
-          <NavLink to="/signin" className="auth-links__link auth-links__link_registration">Войти</NavLink>
+          <NavLink to="/signin" className="auth-links__link auth-links__link_login">Войти</NavLink>
         </li>
       </ul>
     </nav>

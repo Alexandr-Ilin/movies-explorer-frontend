@@ -6,7 +6,7 @@ function Profile({ signOut }) {
   const [isEditing, setIsEditing] = useState(false);
   function handleSubmit(e) {
     e.preventDefault();
-    setIsEditing(true);
+    setIsEditing(!isEditing);
   }
   function handleEditClick() {
     setIsEditing(true);

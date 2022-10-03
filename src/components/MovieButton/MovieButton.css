@@ -9,6 +9,7 @@
   border-style: solid;
   transition: background .4s linear;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.09);
+  outline-color: #F3C1F8;
 }
 
 .movie-button_like {

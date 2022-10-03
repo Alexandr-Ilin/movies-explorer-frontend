@@ -1,5 +1,6 @@
 import './SearchForm.css';
 import { useState } from 'react';
+import MovieCardList from '../MovieCardList/MovieCardList';
 
 function SearchForm() {
   const [isChecked, setIsChecked] = useState(true);
@@ -36,13 +37,14 @@ function SearchForm() {
           <button
             type="button"
             aria-label={isChecked ? 'Выбрать короткометражки' : 'Выбрать любые фильмы'}
-            className={isChecked ? 'search-form__enable-button' : 'search-form__disable-button'}
+            className={`search-form__radio ${isChecked ? 'search-form__radio_marked' : 'search-form__radio_not-marked'}`}
             onClick={handleClick}
           />
           <p className="search-form__button-subtitle">Короткометражки</p>
         </div>
       </form>
-      <button type="button" aria-label="Кнопка ещё" onClick={handleMovie} className="search-form__escho">Ещё</button>
+      <MovieCardList />
+      <button type="button" aria-label="Кнопка ещё" onClick={handleMovie} className="search-form__more">Ещё</button>
     </section>
   );
 }

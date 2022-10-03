@@ -10,6 +10,7 @@ function Navigation() {
           <NavLink
             to="/movies"
             className={`links__link ${currentPath === '/movies' && 'links__link_active'}`}
+            activeClassName="menu__film-link_active"
           >
             Фильмы
           </NavLink>

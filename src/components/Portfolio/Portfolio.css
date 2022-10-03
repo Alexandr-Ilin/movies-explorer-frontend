@@ -38,7 +38,6 @@
   line-height: 50px;
   letter-spacing: -.04em;
   background-image: url(../../images/strelka.svg);
-  background-size: inherit;
   background-repeat: no-repeat;
   background-position: right;
   color: #000;
@@ -84,7 +83,7 @@
 @media screen and (max-width: 767px) {
 
   .portfolio__link {
-    background-size: 4%;
+    /* background-size: 4%; */
   }
 }
 

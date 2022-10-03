@@ -22,7 +22,6 @@ function MovieCard() {
               <h2 className="movie-card__title">33 слова о дизайне</h2>
               <p className="movie-card__duration">1ч53м</p>
             </div>
-            {/* <MovieButton /> */}
 
             {currentPath === '/saved-movies'
               ? (
@@ -34,7 +33,7 @@ function MovieCard() {
                 />
               )
               : <MovieButton />}
-            {currentPath === '/movies' && <MovieButton />}
+            {/* {currentPath === '/movies' && <MovieButton />} */}
           </figcaption>
         </figure>
       </article>

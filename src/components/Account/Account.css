@@ -10,6 +10,7 @@
   padding-right: 35px;
   margin-left: 50px;
   transition: opacity .4s linear;
+  outline-color: #F3C1F8;
 }
 
 .account-link:hover {
@@ -18,4 +19,12 @@
 
 .account-link_active {
   font-weight: 400;
+}
+
+@media screen and (max-width: 1279px) {
+
+  .account-link_active {
+    border-bottom: 2px solid #000;
+    padding-bottom: 4px;
+  }
 }

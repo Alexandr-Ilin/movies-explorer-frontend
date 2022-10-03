@@ -12,6 +12,7 @@ import Profile from '../Profile/Profile';
 import SearchForm from '../SearchForm/SearchForm';
 import MovieCardList from '../MovieCardList/MovieCardList';
 import Duration from '../duracion_grid/duration';
+import MoviePage from '../MoviePage/MoviePage';
 
 function App() {
   return (
@@ -53,11 +54,11 @@ function App() {
         />
         <Route
           path="/movies"
-          element={<SearchForm />}
+          element={<MoviePage />}
         />
         <Route
           path="/saved-movies"
-          element={<SearchForm />}
+          element={<MoviePage />}
         />
         <Route
           path="*"

@@ -1,6 +1,6 @@
 import './SearchForm.css';
 import { useState } from 'react';
-import MovieCardList from '../MovieCardList/MovieCardList';
+// import MovieCardList from '../MovieCardList/MovieCardList';
 
 function SearchForm() {
   const [isChecked, setIsChecked] = useState(true);
@@ -8,16 +8,12 @@ function SearchForm() {
     evt.preventDefault();
   }
 
-  function handleMovie(evt) {
-    console.log(evt);
-  }
-
   function handleClick() {
     setIsChecked(!isChecked);
-    console.log('qwe');
+    console.log('cheked');
   }
   return (
-    <section className="search-form">
+    <div className="search-form">
       <form className="search-form__form" onSubmit={handleSubmit}>
         <div className="search-form__search-container">
           <input
@@ -43,9 +39,7 @@ function SearchForm() {
           <p className="search-form__button-subtitle">Короткометражки</p>
         </div>
       </form>
-      <MovieCardList />
-      <button type="button" aria-label="Кнопка ещё" onClick={handleMovie} className="search-form__more">Ещё</button>
-    </section>
+    </div>
   );
 }
 

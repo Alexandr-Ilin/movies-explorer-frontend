@@ -1,5 +1,5 @@
 .portfolio {
-  padding: 96px 70px 125px;
+  padding: 100px 70px 125px;
   box-sizing: border-box;
 }
 
@@ -20,7 +20,7 @@
 
 .portfolio__link-item {
   border-bottom: 1px solid;
-  padding-bottom: 17px;
+  padding-bottom: 19px;
   border-color: #e8e8e8;
   margin-bottom: 20px;
 }
@@ -28,6 +28,7 @@
 .portfolio__link-item:last-of-type{
   margin: 0;
   border: none;
+  padding: 0;
 }
 
 .portfolio__link {
@@ -51,7 +52,7 @@
 @media screen and (max-width: 1279px) {
 
   .portfolio {
-     padding: 90px 50px 0;
+     padding: 90px 50px 90px;
   }
 
   .portfolio__link {
@@ -80,10 +81,10 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 320px) {
 
   .portfolio__link {
-    /* background-size: 4%; */
+    background-size: 4%;
   }
 }
 

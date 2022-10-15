@@ -1,5 +1,5 @@
 .about-me {
-  padding: 116px 70px 0;
+  padding: 110px 70px 0;
   box-sizing: border-box;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .about-me__foto {
-  width: 24%;
+  width: 270px;
   border-radius: 10px;
   object-fit: contain;
   margin-left: 20px;
@@ -114,9 +114,10 @@
   .about-me__foto {
     width: 292px;
     margin: 0 0 40px;
+    max-height: 352px;
   }
   .about-me__header{
-    font-size: (15px + 1.56vw);  /*30px*/
+    font-size: calc(15px + 1.56vw);  /*30px*/
     line-height: 36px;
     margin-bottom: 20px;
   }

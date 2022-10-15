@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import './HeaderMenu.css';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Account from '../Account/Account';
 
 function HeaderMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  const currentPath = useLocation().pathname;
   function handleClick() {
     setIsOpen(!isOpen);
   }
@@ -28,7 +27,7 @@ function HeaderMenu() {
           <li className="header-menu__links-item">
             <NavLink
               to="/"
-              className={`header-menu__link header-menu__link_main ${currentPath === '/' && 'header-menu__link_active'}`}
+              className={({ isActive }) => (`header-menu__link header-menu__link_main ${isActive ? 'header-menu__link_active' : ''}`)}
             >
               Главная
             </NavLink>
@@ -36,7 +35,7 @@ function HeaderMenu() {
           <li className="header-menu__links-item">
             <NavLink
               to="/movies"
-              className={`header-menu__link ${currentPath === '/movies' && 'header-menu__link_active'}`}
+              className={({ isActive }) => (`header-menu__link ${isActive ? 'header-menu__link_active' : ''}`)}
             >
               Фильмы
             </NavLink>
@@ -44,7 +43,9 @@ function HeaderMenu() {
           <li className="header-menu__links-item">
             <NavLink
               to="/saved-movies"
-              className={`header-menu__link ${currentPath === '/saved-movies' && 'header-menu__link_active'}`}
+              // eslint-disable-next-line max-len
+              // className={`header-menu__link ${currentPath === '/saved-movies' ? 'header-menu__link_active' : ''}`}
+              className={({ isActive }) => (`header-menu__link ${isActive ? 'header-menu__link_active' : ''}`)}
             >
               Сохранённые фильмы
             </NavLink>

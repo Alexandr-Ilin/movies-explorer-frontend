@@ -1,16 +1,11 @@
 .account-link {
   text-decoration: none;
-  color: #000;
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: 500;
-  background-image: url(../../images/account-icon.svg);
-  background-repeat: no-repeat;
-  background-position: right;
-  padding-right: 35px;
   margin-left: 50px;
   transition: opacity .4s linear;
   outline-color: #F3C1F8;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
 }
 
 .account-link:hover {
@@ -21,10 +16,44 @@
   font-weight: 400;
 }
 
+.account-link__icon {
+  width: 26px;
+  min-height: 30px;
+  background-image: url(../../images/account-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  box-sizing: border-box;
+  margin-block: 0;
+  margin-left: 17px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.account-link__icon_landing {
+  background-color: transparent;
+}
+
+.account-link__text {
+  color: #000;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: inherit;
+  margin-block: 0;
+}
+
 @media screen and (max-width: 1279px) {
+
+  .account-link {
+    margin: 0;
+  }
 
   .account-link_active {
     border-bottom: 2px solid #000;
     padding-bottom: 4px;
+  }
+
+  .account-link__icon {
+
   }
 }

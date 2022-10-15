@@ -1,41 +1,51 @@
 .register-page {
   display: flex;
   flex-direction: column;
-  padding: 70px 442px;
   box-sizing: border-box;
-  width: 1280px;
+  max-width: 396px;
+  align-items: flex-start;
+  margin: 0 auto;
+  min-height: 100vh;
+  height: 100%;
+  justify-content: center;
+  padding: 70px 0;
 }
 
 .register-page__title{
   font-size: 24px;
   line-height: 29px;
   font-weight: 500;
+  margin-block: 0;
   margin: 40px 0;
 }
 
 .form-register {
-  margin-bottom: 42px;
+  margin-bottom: 16px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-register__label {
   display: block;
   font-size: 10px;
-  line-height: 14px;
+  line-height: 12px;
   font-weight: 400;
   color: #a0a0a0;
 }
 
 .form-register__label:last-of-type {
-  margin-bottom: 69px;
+  margin-bottom: auto;
 }
 
 .form-register__input {
-  margin: 10px 0 10px;
+  margin: 10px 0 ;
   width: 100%;
   font-size: 13px;
   line-height: 16px;
   font-weight: 400;
-  height: 46px;
+  min-height: 46px;
   border: none;
   border-radius: 8px;
   background: #f9f9f9;
@@ -56,6 +66,7 @@
   transition: opacity .4s linear;
   padding: 0;
   border: none;
+  margin-top: 42px;
 }
 
 .form-register__submit:hover {
@@ -87,4 +98,39 @@
   color: #000;
   text-decoration: none;
   margin-left: 6px;
+}
+
+@media  screen and (max-width: 1279px) {
+
+  .register-page {
+    padding: calc(232 / 1024 * 100vh) 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .register-page {
+    max-width: 396px;
+    align-items: center;
+    padding: 56px 30px 30px;
+  }
+
+  .register-page__title{
+    margin: 50px 0 80px;
+  }
+
+  .form-register__submit {
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  .register-page__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register-page__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

@@ -33,7 +33,6 @@ function MovieCard() {
                 />
               )
               : <MovieButton />}
-            {/* {currentPath === '/movies' && <MovieButton />} */}
           </figcaption>
         </figure>
       </article>

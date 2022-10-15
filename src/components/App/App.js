@@ -1,5 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
+import { useState } from 'react';
 import NotFoundPage from '../NotFoundPage/NotFounPage';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -7,14 +8,20 @@ import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
-// import MovieCard from '../MovieCard/MovieCard';
-// import MovieButton from '../MovieButton/MovieButton';
-import SearchForm from '../SearchForm/SearchForm';
-import MovieCardList from '../MovieCardList/MovieCardList';
-import Duration from '../duracion_grid/duration';
 import MoviePage from '../MoviePage/MoviePage';
 
 function App() {
+  const history = useNavigate();
+  const [isLogin, setIsLogin] = useState(false);
+  const handleLogin = () => {
+    setIsLogin(true);
+    history('/movies');
+  };
+
+  const signOut = () => {
+    setIsLogin(false);
+    history('/');
+  };
   return (
     <div className="App">
       <Routes>
@@ -22,27 +29,21 @@ function App() {
           path="/"
           element={(
             <>
-              <Header />
+              <Header
+                isLogin={isLogin}
+              />
               <Main />
               <Footer />
             </>
           )}
         />
         <Route
-          path="/cardbutton"
-          element={<SearchForm />}
-        />
-        <Route
-          path="/cardlist"
-          element={<MovieCardList />}
-        />
-        <Route
-          path="/duration"
-          element={<Duration />}
-        />
-        <Route
           path="/signin"
-          element={<Login />}
+          element={(
+            <Login
+              handleLogin={handleLogin}
+            />
+          )}
         />
         <Route
           path="/signup"
@@ -50,15 +51,28 @@ function App() {
         />
         <Route
           path="/profile"
-          element={<Profile />}
+          element={(
+            <Profile
+              isLogin={isLogin}
+              signOut={signOut}
+            />
+          )}
         />
         <Route
           path="/movies"
-          element={<MoviePage />}
+          element={(
+            <MoviePage
+              isLogin={isLogin}
+            />
+          )}
         />
         <Route
           path="/saved-movies"
-          element={<MoviePage />}
+          element={(
+            <MoviePage
+              isLogin={isLogin}
+            />
+        )}
         />
         <Route
           path="*"

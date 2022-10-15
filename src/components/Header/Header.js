@@ -4,9 +4,8 @@ import Logo from '../Logo/Logo';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
 import HeaderMenu from '../HeaderMenu/HeaderMenu';
 
-function Header() {
+function Header({ isLogin }) {
   const currentPath = useLocation().pathname;
-  const isLogin = true;
   return (
     <header
       className={`header ${currentPath === '/' ? 'header_type_landing' : ''}`}

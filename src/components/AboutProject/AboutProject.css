@@ -1,5 +1,5 @@
 .about {
-  padding: 110px 70px;
+  padding: 110px 70px 100px;
   box-sizing: border-box;
 }
 
@@ -33,7 +33,7 @@
   line-height: 24px;
   font-weight: 400;
   margin-block: 0;
-  margin: 0 10px 22px 0;
+  margin: 0 10px 26px 0;
   letter-spacing: -.04em;
   color: #000;
 }
@@ -51,6 +51,7 @@
   display: grid;
   grid-template-columns: 20% 1fr;
   grid-template-rows: 36px 36px;
+  row-gap: 5px;
 }
 
 .about__time {
@@ -83,20 +84,22 @@
 
 @media screen and (max-width: 1279px) {
   .about {
-    padding: 90px 50px 90px;
+    padding: 90px 50px 81px;
   }
   .about__project-text {
     font-size: 12px;
     line-height: 18px;
   }
   .about__container {
-    margin-bottom: 90px;
+    margin-bottom: 93px;
   }
   .about__container-duration{
     grid-template-columns: 21% 1fr;
   }
 
-
+  .about__project-title {
+    margin: 0 10px 22px 0;
+  }
   .about__project {
     /* margin-bottom: 82px; */
   }
@@ -140,6 +143,7 @@
 
   .about__project {
     margin-bottom: 57px;
+    width: 100%;
   }
 }
 
@@ -148,6 +152,7 @@
   .about__container-duration {
     grid-template-columns: 100px 184px;
     grid-template-rows: 35px 35px;
+    row-gap: 0;
   }
 
   .about__title {

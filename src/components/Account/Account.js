@@ -1,14 +1,15 @@
-import { NavLink, useLocation } from 'react-router-dom';
 import './Account.css';
+import { NavLink, useLocation } from 'react-router-dom';
 
 function Account() {
   const currentPath = useLocation().pathname;
   return (
     <NavLink
       to="/profile"
-      className={`account-link ${currentPath === '/profile' && 'account-link_active'}`}
+      className={({ isActive }) => (`account-link ${isActive ? 'account-link_active' : ''}`)}
     >
-      Аккаунт
+      <p className="account-link__text">Аккаунт</p>
+      <p className={`account-link__icon ${currentPath === '/' ? 'account-link__icon_landing' : ''}`} />
     </NavLink>
   );
 }

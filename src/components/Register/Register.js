@@ -7,7 +7,7 @@ function Register() {
     e.preventDefault();
   }
   return (
-    <main>
+    <main className="main">
       <section className="register-page">
         <Logo />
         <h1 className="register-page__title">Добро пожаловать!</h1>

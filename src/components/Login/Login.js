@@ -10,7 +10,6 @@ function Login({ handleLogin }) {
   return (
     <main className="main">
       <section className="login-page">
-        {/* <div className="login-page__wrapper"> */}
         <Logo />
         <h1 className="login-page__title">Рады видеть!</h1>
         <form className="form-login" onSubmit={onSubmit}>
@@ -49,7 +48,6 @@ function Login({ handleLogin }) {
             Регистрация
           </Link>
         </p>
-        {/* </div> */}
       </section>
     </main>
   );

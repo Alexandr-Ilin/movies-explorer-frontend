@@ -7,8 +7,6 @@
   padding: 75px 70px 75px;
   box-sizing: border-box;
   width: 100%;
-  /* height: calc(100vh-74px);
-  min-height: calc(700px - 74px); */
 }
 
 .promo__container {
@@ -115,7 +113,7 @@
     letter-spacing: -.04em;
   }
 
-  .promo__link{
+  .promo__link {
     width: 129px;
     height: 36px;
     display: flex;

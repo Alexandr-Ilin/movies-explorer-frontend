@@ -49,7 +49,9 @@ function HeaderMenu() {
             </NavLink>
           </li>
           <li className="header-menu__links-item">
-            <Account />
+            <Account
+              isOpen={isOpen}
+            />
           </li>
         </ul>
       </nav>

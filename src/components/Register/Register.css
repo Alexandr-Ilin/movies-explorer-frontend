@@ -12,7 +12,7 @@
   padding: 70px 0;
 }
 
-.register-page__title{
+.register-page__title {
   font-size: 24px;
   line-height: 29px;
   font-weight: 500;
@@ -55,10 +55,6 @@
   box-sizing: border-box;
   outline: none;
 }
-
-/* .form-register__input:invalid {
-  color: #ff4062;
-} */
 
 .form-register__submit {
   width: 100%;
@@ -114,7 +110,7 @@
     justify-content: normal;
   }
 
-  .register-page__title{
+  .register-page__title {
     margin: 50px 0 80px;
   }
 

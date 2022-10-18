@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './AuthNavigation.css';
 
 function AuthNavigation() {
@@ -6,10 +6,10 @@ function AuthNavigation() {
     <nav>
       <ul className="auth-links">
         <li className="auth-links__item">
-          <NavLink to="/signup" className="auth-links__link">Регистрация</NavLink>
+          <Link to="/signup" className="auth-links__link">Регистрация</Link>
         </li>
         <li className="auth-links__item">
-          <NavLink to="/signin" className="auth-links__link auth-links__link_login">Войти</NavLink>
+          <Link to="/signin" className="auth-links__link auth-links__link_login">Войти</Link>
         </li>
       </ul>
     </nav>

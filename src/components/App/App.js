@@ -10,20 +10,24 @@ import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
 import MoviePage from '../MoviePage/MoviePage';
 import SavedMoviePage from '../SavedMoviePage/SavedMoviePage';
-import Preloader from '../Preloader/Preloader';
 
 function App() {
-  const history = useNavigate();
+  const path = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
   const handleLogin = () => {
     setIsLogin(true);
-    history('/movies');
+    path('/movies');
+  };
+
+  const handleRegister = () => {
+    path('/signin');
   };
 
   const signOut = () => {
     setIsLogin(false);
-    history('/');
+    path('/');
   };
+
   return (
     <div className="App">
       <Routes>
@@ -49,11 +53,11 @@ function App() {
         />
         <Route
           path="/signup"
-          element={<Register />}
-        />
-        <Route
-          path="/preloader"
-          element={<Preloader />}
+          element={(
+            <Register
+              handleRegister={handleRegister}
+            />
+          )}
         />
         <Route
           path="/profile"

@@ -34,15 +34,18 @@
 }
 
 @media screen and (max-width: 767px) {
+
   .auth-links__link {
     font-size: 10px;
     padding: 0;
   }
+
   .auth-links__link_login {
     margin-left: 15px;
     width: 54px;
     height: 26px;
   }
+
   .auth-links {
     justify-content: flex-end;
   }

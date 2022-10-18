@@ -33,20 +33,3 @@ function AboutProject() {
 }
 
 export default AboutProject;
-
-// <div className="about__container-duration">
-//   <div className="about__back-end-duration">
-//     <p className="about__time about__time_type_black">1 неделя</p>
-//     <p className="about__process">
-//       Back-end
-//     </p>
-//   </div>
-//   <div className="about__front-end-duration">
-//     <p className="about__time about__time_type_gray">
-//       4 недели
-//     </p>
-//     <p className="about__process">
-//       Front-end
-//     </p>
-//   </div>
-// </div>

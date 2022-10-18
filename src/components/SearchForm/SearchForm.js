@@ -1,6 +1,5 @@
 import './SearchForm.css';
 import { useState } from 'react';
-// import MovieCardList from '../MovieCardList/MovieCardList';
 
 function SearchForm() {
   const [isChecked, setIsChecked] = useState(true);
@@ -17,7 +16,7 @@ function SearchForm() {
       <form className="search-form__form" onSubmit={handleSubmit}>
         <div className="search-form__search-container">
           <input
-            type="search"
+            type="text"
             className="search-form__input"
             placeholder="Фильм"
           />

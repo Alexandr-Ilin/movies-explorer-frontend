@@ -8,7 +8,6 @@
   padding: 74px 0 70px;
   box-sizing: border-box;
   justify-content: center;
-  /* min-height: 590px; */
   flex-grow: 1;
 }
 
@@ -119,7 +118,6 @@
   background: transparent;
   cursor: pointer;
   transition: opacity .4s linear;
-  /* margin: 0 0 16px; */
   margin: 193px 0 16px;
 }
 

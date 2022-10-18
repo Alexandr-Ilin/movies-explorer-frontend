@@ -2,9 +2,10 @@ import './Register.css';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 
-function Register() {
+function Register({ handleRegister }) {
   function onSubmit(e) {
     e.preventDefault();
+    handleRegister();
   }
   return (
     <main className="main">

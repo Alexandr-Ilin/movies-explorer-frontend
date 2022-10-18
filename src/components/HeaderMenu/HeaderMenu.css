@@ -8,18 +8,17 @@
 
 .header-menu__button {
   display: none;
-  background: url(../../images/menu_button.svg);
+  background-image: url(../../images/menu_button.svg);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  /* background: transparent; */
+  background-color: transparent;
   height: 44px;
   width: 44px;
   border: none;
   transition: opacity .4s linear;
   cursor: pointer;
   z-index: 2;
-  outline-color: #F3C1F8;
   padding: 0;
 }
 
@@ -49,7 +48,6 @@
   cursor: pointer;
   background-color: transparent;
   border: none;
-  outline-color: #F3C1F8;
 }
 
 .header-menu__close-button:hover {
@@ -63,21 +61,22 @@
   text-decoration: none;
   color: #000;
   transition: opacity .4s linear;
-  outline-color: #F3C1F8;
+}
+
+.header-menu__link:hover {
+  opacity: .8;
+}
+
+.header-menu__link_main {
+  display: none;
 }
 
 .header-menu__links-item {
   margin-left: 20px;
-  outline-color: #F3C1F8;
 }
 
 .header-menu__links-item:last-of-type {
   margin: 0;
-}
-
-
-.header-menu__link_main {
-  display: none;
 }
 
 @media screen and (min-width: 1280px) {
@@ -160,8 +159,17 @@
 
 @media screen and (max-width:767px) {
 
+  .header-menu__container {
+    padding: 144px 0 48px;
+  }
+
   .header-menu__button {
     width: 40px;
     height: 43px;
+  }
+
+  .header-menu__close-button {
+    top: 18px;
+    right: 18px;
   }
 }

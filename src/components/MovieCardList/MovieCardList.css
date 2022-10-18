@@ -4,12 +4,17 @@
   padding-inline-start: 0;
   padding: 70px 70px 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); */
+  grid-template-columns: repeat(4, 270px);
   justify-items: center;
   gap: 32px 20px;
   margin-block: 0;
   box-sizing: border-box;
   margin-bottom: 80px;
+}
+
+.card-list_saved-movies {
+  margin-bottom: 170px;
 }
 
 .more-button {
@@ -33,14 +38,10 @@
   opacity: .8;
 }
 
-.more-button_disabled {
-  opacity: .6;
-  pointer-events: none;
-}
-
 @media screen and (max-width: 1279px) {
 
   .card-list{
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
     gap: 36px 30px;
     padding: 0 30px;
   }
@@ -57,8 +58,8 @@
     padding: 0 10px;
   }
 
-  .more-button {
+  /* .more-button {
     margin-bottom: 100px;
-  }
+  } */
 
 }

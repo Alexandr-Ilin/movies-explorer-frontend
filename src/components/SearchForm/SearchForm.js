@@ -17,7 +17,7 @@ function SearchForm() {
       <form className="search-form__form" onSubmit={handleSubmit}>
         <div className="search-form__search-container">
           <input
-            type="text"
+            type="search"
             className="search-form__input"
             placeholder="Фильм"
           />

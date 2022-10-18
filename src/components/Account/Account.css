@@ -2,7 +2,6 @@
   text-decoration: none;
   margin-left: 50px;
   transition: opacity .4s linear;
-  outline-color: #F3C1F8;
   display: flex;
   align-items: center;
   font-weight: 500;
@@ -51,9 +50,5 @@
   .account-link_active {
     border-bottom: 2px solid #000;
     padding-bottom: 4px;
-  }
-
-  .account-link__icon {
-
   }
 }

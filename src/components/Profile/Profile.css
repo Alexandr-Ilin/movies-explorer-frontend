@@ -3,10 +3,13 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 410px;
   height: 100%;
-  padding: 74px 70px 70px;
+  padding: 74px 0 70px;
   box-sizing: border-box;
-  min-height: 590px;
+  justify-content: center;
+  /* min-height: 590px; */
+  flex-grow: 1;
 }
 
 .profile-page__title {
@@ -21,11 +24,9 @@
 
 .form-profile {
   width: 100%;
-  max-width: 410px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: auto;
 }
 
 .form-profile__user-data {
@@ -50,10 +51,7 @@
   display: block;
   text-align: right;
   width: 100%;
-}
-
-  .form-profile__error_type_email {
-  margin-bottom: 110px;
+  min-height: 12px;
 }
 
 .form-profile__error-serv {
@@ -61,25 +59,29 @@
   font-weight: 400;
   line-height: 12px;
   color: #ff4062;
-  margin-bottom: 20px;
+  margin: 166px 0 20px;
+  min-height: 12px;
+  width: 100%;
+  text-align: center;
 }
 
 .form-profile__input {
   padding: 0;
   border: none;
-  /* border: 1px solid #e8e8e8; */
   width: 100%;
   height: 46px;
   text-align: right;
   font-size: 11px;
   font-weight: 400;
   line-height: 13px;
+  /* cursor: none; */
   outline: none;
 }
 
-/* .form-profile__input:first-of-type {
-  border-bottom: 1px solid #e8e8e8;
-} */
+.form-profile__input:disabled {
+  background: none;
+  color: inherit;
+}
 
 .form-profile__user-data {
   width: 100%;
@@ -117,7 +119,8 @@
   background: transparent;
   cursor: pointer;
   transition: opacity .4s linear;
-  margin: 42px 0 16px;
+  /* margin: 0 0 16px; */
+  margin: 193px 0 16px;
 }
 
 .profile-page__edit:hover {
@@ -144,7 +147,15 @@
 
   .profile-page {
     padding: 236px 0 269px;
-    min-height: 790px;
+    /* min-height: 790px; */
+  }
+
+  .profile-page__edit {
+    margin-top: 181px;
+  }
+
+  .form-profile__error-serv {
+    margin-top: 152px;
   }
 
   .profile-page__title {
@@ -155,8 +166,9 @@
 @media screen and  (max-width: 767px) {
 
   .profile-page {
-    min-height: 530px;
+    /* min-height: 530px; */
     padding: 70px 30px 40px;
+    min-height: 426px;
   }
 
   .profile-page__title {
@@ -166,6 +178,15 @@
   .profile-page__edit {
     font-size: 12px;
     line-height: 15px;
+    margin-top: auto;
+  }
+
+  .form-profile {
+    flex-grow: 1;
+  }
+
+  .form-profile__error-serv {
+    margin-top: auto;
   }
 
   .profile-page__signout {

@@ -9,6 +9,8 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
 import MoviePage from '../MoviePage/MoviePage';
+import SavedMoviePage from '../SavedMoviePage/SavedMoviePage';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
   const history = useNavigate();
@@ -50,6 +52,10 @@ function App() {
           element={<Register />}
         />
         <Route
+          path="/preloader"
+          element={<Preloader />}
+        />
+        <Route
           path="/profile"
           element={(
             <Profile
@@ -69,7 +75,7 @@ function App() {
         <Route
           path="/saved-movies"
           element={(
-            <MoviePage
+            <SavedMoviePage
               isLogin={isLogin}
             />
         )}

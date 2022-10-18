@@ -1,5 +1,5 @@
 import './Register.css';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 
 function Register() {
@@ -41,24 +41,24 @@ function Register() {
             <input
               id="password"
               name="password"
-              className="form-register__input"
+              className="form-register__input form-register__input_password"
               type="password"
               minLength="2"
               maxLength="20"
               required
             />
-            <span className="form-register__error">password-error</span>
+            <span className="form-register__error">Что-то пошло не так...</span>
           </label>
           <button type="submit" className="form-register__submit">Зарегистрироваться</button>
         </form>
         <p className="register-page__text">
-          Уже зарегистрировались?
-          <NavLink
+          Уже зарегистрированы?
+          <Link
             to="/signin"
             className="register-page__link"
           >
             Войти
-          </NavLink>
+          </Link>
         </p>
       </section>
     </main>

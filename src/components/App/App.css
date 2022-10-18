@@ -13,12 +13,13 @@
   width: 100%;
   max-width: 1280px;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
+  flex-grow: 1;
   /* height: 100%; */
 }

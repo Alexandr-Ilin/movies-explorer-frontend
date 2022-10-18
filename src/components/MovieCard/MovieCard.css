@@ -51,7 +51,6 @@
   transition: opacity .4s linear;
   cursor: pointer;
   padding: 0;
-  outline-color: #F3C1F8;
 }
 
 .movie-card__remove:hover {
@@ -61,8 +60,4 @@
 .movie-item {
   list-style-type: none;
   width: 100%;
-}
-
-.movie-item:last-child {
-  list-style-type: none;
 }

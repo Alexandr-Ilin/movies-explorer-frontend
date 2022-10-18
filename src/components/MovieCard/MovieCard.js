@@ -1,9 +1,8 @@
 import './MovieCard.css';
 import { useLocation } from 'react-router-dom';
-import cardPath from '../../TestCard/2.jpg';
 import MovieButton from '../MovieButton/MovieButton';
 
-function MovieCard() {
+function MovieCard({ cardPath, title, duracion }) {
   const currentPath = useLocation().pathname;
   function handleClick(evt) {
     console.log(evt);
@@ -19,8 +18,8 @@ function MovieCard() {
           />
           <figcaption className="movie-card__info">
             <div className="movie-card__title-wrapper">
-              <h2 className="movie-card__title">33 слова о дизайне</h2>
-              <p className="movie-card__duration">1ч53м</p>
+              <h2 className="movie-card__title">{title}</h2>
+              <p className="movie-card__duration">{duracion}</p>
             </div>
 
             {currentPath === '/saved-movies'

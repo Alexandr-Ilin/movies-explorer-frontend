@@ -43,8 +43,6 @@ function HeaderMenu() {
           <li className="header-menu__links-item">
             <NavLink
               to="/saved-movies"
-              // eslint-disable-next-line max-len
-              // className={`header-menu__link ${currentPath === '/saved-movies' ? 'header-menu__link_active' : ''}`}
               className={({ isActive }) => (`header-menu__link ${isActive ? 'header-menu__link_active' : ''}`)}
             >
               Сохранённые фильмы

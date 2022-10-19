@@ -22,6 +22,10 @@
   opacity: .8;
 }
 
+.auth-links__link:focus-visible {
+  outline: 2px solid #2BE080;
+}
+
 .auth-links__link_login {
   color: #fff;
   background-color: #000;

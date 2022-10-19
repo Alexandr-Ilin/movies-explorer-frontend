@@ -108,6 +108,11 @@
   opacity: .8;
 }
 
+.form-profile__submit:focus-visible {
+  outline: 2px solid #2BE080;
+  outline-offset: 2px;
+}
+
 .profile-page__edit {
   font-size: 13px;
   line-height: 16px;
@@ -124,6 +129,10 @@
   opacity: .8;
 }
 
+.profile-page__edit:focus-visible {
+  outline: 2px solid #2BE080;
+}
+
 .profile-page__signout {
   font-size: 13px;
   line-height: 16px;
@@ -138,6 +147,10 @@
 
 .profile-page__signout:hover {
   opacity: .8;
+}
+
+.profile-page__signout:focus-visible {
+  outline: 2px solid #2BE080;
 }
 
 @media screen and (max-width: 1279px) {

@@ -26,6 +26,10 @@
   opacity: .8;
 }
 
+.header-menu__button:focus-visible {
+  outline: 2px solid #2BE080;
+}
+
 .header-menu__links {
   list-style: none;
   padding-inline-start: 0;
@@ -54,6 +58,10 @@
   opacity: .8;
 }
 
+.header-menu__close-button:focus-visible {
+  outline: 2px solid #2BE080;
+}
+
 .header-menu__link {
   font-size: 14px;
   line-height: 18px;
@@ -63,8 +71,16 @@
   transition: opacity .4s linear;
 }
 
+.header-menu__link_active {
+  font-weight: 400;
+}
+
 .header-menu__link:hover {
   opacity: .8;
+}
+
+.header-menu__link:focus-visible {
+  outline: 2px solid #2BE080;
 }
 
 .header-menu__link_main {
@@ -79,11 +95,6 @@
   margin: 0;
 }
 
-@media screen and (min-width: 1280px) {
-  .header-menu__link_active {
-    font-weight: 400;
-  }
-}
 @media screen and (max-width: 1279px) {
 
   .header-menu_opened {

@@ -9,7 +9,7 @@ function MovieButton() {
   }
   return (
     <button
-      className={`movie-button ${isLike && 'movie-button_like'}`}
+      className={`movie-button ${isLike ? 'movie-button_like' : ''}`}
       type="button"
       aria-label="Выбрать Фильм"
       onClick={handleClick}

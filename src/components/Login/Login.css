@@ -74,6 +74,11 @@
   opacity: .8;
 }
 
+.form-login__submit:focus-visible {
+  outline: 2px solid #2BE080;
+  outline-offset: 2px;
+}
+
 .form-login__error {
   font-size: 10px;
   line-height: 12px;
@@ -99,6 +104,16 @@
   text-decoration: none;
   display: inline-block;
   margin-left: 6px;
+  transition: opacity .4s linear;
+}
+
+.login-page__link:hover {
+  opacity: .8;
+}
+
+.login-page__link:focus-visible {
+  outline: 2px solid #2BE080;
+  outline-offset: 2px;
 }
 
 @media screen and (max-width: 767px) {

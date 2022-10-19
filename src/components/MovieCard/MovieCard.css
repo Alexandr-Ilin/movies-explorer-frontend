@@ -57,6 +57,10 @@
   opacity: .8;
 }
 
+.movie-card__remove:focus-visible {
+    outline: 2px solid #2BE080;
+}
+
 .movie-item {
   list-style-type: none;
   width: 100%;

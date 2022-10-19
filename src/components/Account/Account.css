@@ -11,6 +11,10 @@
   opacity: .8;
 }
 
+.account-link:focus-visible {
+  outline: 2px solid #2BE080;
+}
+
 .account-link_active {
   font-weight: 400;
 }

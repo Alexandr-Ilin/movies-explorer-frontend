@@ -37,6 +37,10 @@
   opacity: .8;
 }
 
+.not-found-page__link:focus-visible {
+  outline: 2px solid #2BE080;
+}
+
 @media screen and (max-width: 1279px) {
 
   .not-found-page {

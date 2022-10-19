@@ -75,6 +75,11 @@
   opacity: .8;
 }
 
+.form-register__submit:focus-visible {
+  outline: 2px solid #2BE080;
+  outline-offset: 2px;
+}
+
 .form-register__error {
   font-size: 10px;
   line-height: 12px;
@@ -100,6 +105,15 @@
   color: #000;
   text-decoration: none;
   margin-left: 6px;
+  transition: opacity .4s linear;
+}
+
+.register-page__link:hover {
+  opacity: .8;
+}
+
+.register-page__link:focus-visible {
+  outline: 2px solid #2BE080;
 }
 
 @media screen and (max-width: 767px) {

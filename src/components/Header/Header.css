@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 70px;
+  box-sizing: border-box;
+  min-height: 74px;
+  width: 100%;
+}
+
+.header__link-container {
+  display: flex;
+}
+
+.header_type_landing {
+  background: #f3c1f8;
+}
+
+@media screen and (max-width: 1279px) {
+  .header {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding: 0 14px;
+  }
+}

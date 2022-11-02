@@ -3,15 +3,19 @@ import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 import MovieCardList from '../MovieCardList/MovieCardList';
 
-function MoviePage({ isLogin }) {
+function MoviePage({ isLogin, searchedMovies, searchMovies }) {
   return (
     <>
       <Header
         isLogin={isLogin}
       />
       <main className="main">
-        <SearchForm />
-        <MovieCardList />
+        <SearchForm
+          searchMovies={searchMovies}
+        />
+        <MovieCardList
+          searchedMovies={searchedMovies}
+        />
       </main>
       <Footer />
     </>

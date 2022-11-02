@@ -6,10 +6,17 @@
   box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.05);
 }
 
+.movie-card__trailer-link {
+  /* height: 151px; */
+  text-decoration: none;
+}
+
 .movie-card__image {
   display: block;
   object-fit: cover;
   width: 100%;
+  height: 151px;
+  border-radius: 10px 10px 0 0;
 }
 
 .movie-card__info {
@@ -23,12 +30,21 @@
 
 }
 
+/* размер на глаз */
+.movie-card__title-wrapper {
+  max-width: 80%;
+}
+
 .movie-card__title {
   margin-block: 0;
   margin-bottom: 10px;
   font-size: 13px;
   line-height: 16px;
   font-weight: 500;
+  /* переполнение */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .movie-card__duration {
@@ -65,3 +81,11 @@
   list-style-type: none;
   width: 100%;
 }
+
+@media screen and (max-width: 1279px) {
+  .movie-card__image {
+    height: auto;
+  }
+};
+
+

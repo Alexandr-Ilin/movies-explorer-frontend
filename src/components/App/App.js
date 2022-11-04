@@ -41,28 +41,21 @@ function App() {
       .then((movies) => {
         setAllMovies(movies);
         const shortMovies = searchShortMovies();
+        console.log(shortMovies, '000');
         setAllShortMovies(shortMovies);
-        // console.log(allMovies, '1.1');
-        // console.log(shortMovies, '1');
+        console.log(allMovies, '1.1');
+        console.log(shortMovies, '1');
       })
       .catch((err) => {
         console.log(err, 'err');
       });
-  }, []);
-
-  // const searchMovies = (searchValue, isShort) => {
-  //   // console.log(searchValue, 'app-search-value');
-  //   // console.log(isShort, 'isShort');
-  //   const searchList = allMovies.filter((movie) => {
-  //     const movieNameRU = movie.nameRU.toLowerCase();
-  //     // console.log(movieName, 'mov-name');
-  //     return movieNameRU.includes(searchValue.toLowerCase());
-  //   });
-  //   console.log(searchList, 'searchList');
-  //   setSearchedMovies(searchList);
-  // };
+  }, [isLogin]);
 
   const searchMovies = (searchValue, isShort) => {
+    console.log(isShort, 'из апп');
+    console.log(allShortMovies, 'allShort');
+    const abc = (isShort ? 'yes' : 'no');
+    console.log(abc, 'abc');
     const searchList = (isShort ? allShortMovies : allMovies).filter((movie) => {
       console.log(isShort);
       const movieNameRU = movie.nameRU.toLowerCase();

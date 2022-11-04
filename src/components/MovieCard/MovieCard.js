@@ -15,7 +15,7 @@ function MovieCard({ card }) {
   }
 
   const currentPath = useLocation().pathname;
-  // console.log(card, 'card');
+  //  console.log(card, 'card');
   // debugger;
   function handleClick(evt) {
     console.log(evt);

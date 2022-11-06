@@ -1,8 +1,13 @@
 import './Login.css';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import useForm from '../../utils/useForm';
 
 function Login({ handleLogin }) {
+  const {
+    values, errors, handleChange, isValid,
+  } = useForm();
+  // const regexp = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
   function onSubmit(e) {
     e.preventDefault();
     handleLogin();
@@ -17,12 +22,16 @@ function Login({ handleLogin }) {
             Email
             <input
               id="Email"
-              name="Email"
+              name="EmailLogin"
               className="form-login__input"
+              onChange={handleChange}
+              // autoComplete="off"
               type="Email"
+              pattern="^(.+)@(.+)\.(.+)$"
+              value={values.EmailLogin || ''}
               required
             />
-            <span className="form-login__error">Email-error</span>
+            <span className="form-login__error">{errors.EmailLogin ? 'Введите адрес электронной почты' : ''}</span>
           </label>
           <label className="form-login__label" htmlFor="password">
             Пароль
@@ -33,11 +42,14 @@ function Login({ handleLogin }) {
               type="password"
               minLength="2"
               maxLength="20"
+              autoComplete="off"
+              onChange={handleChange}
+              value={values.password || ''}
               required
             />
-            <span className="form-login__error">password-error</span>
+            <span className="form-login__error">{errors.password ? 'Пароль от 2 до 20 символов' : ''}</span>
           </label>
-          <button type="submit" className="form-login__submit">Войти</button>
+          <button type="submit" className="form-login__submit" disabled={!isValid}>Войти</button>
         </form>
         <p className="login-page__text">
           Ещё не зарегистрированы?

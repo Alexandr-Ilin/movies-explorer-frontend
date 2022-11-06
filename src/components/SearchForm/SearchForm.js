@@ -4,8 +4,9 @@ import useForm from '../../utils/useForm';
 
 function SearchForm({ searchMovies }) {
   const [isShort, setIsShort] = useState(true);
-  const { values, handleChange } = useForm();
+  const { values, handleChange, errors } = useForm();
   console.log(values);
+  console.log(errors, 'errors');
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -29,6 +30,7 @@ function SearchForm({ searchMovies }) {
             onChange={handleChange}
             required
           />
+          <span className="search-form__error">{errors.search}</span>
           <button
             type="submit"
             className="search-form__submit"

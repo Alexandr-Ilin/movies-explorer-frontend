@@ -79,6 +79,10 @@
   outline-offset: 2px;
 }
 
+.form-login__submit:disabled {
+  opacity: .6;
+}
+
 .form-login__error {
   font-size: 10px;
   line-height: 12px;

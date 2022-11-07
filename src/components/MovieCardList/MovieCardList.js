@@ -1,20 +1,17 @@
-/* eslint-disable no-nested-ternary */
 import './MovieCardList.css';
 import { useLocation } from 'react-router-dom';
 import React, { useState } from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 import useScreenWidth from '../../utils/useWidthScreen';
 import useStartSet from '../../utils/useStartSet';
-// import cardPath from '../../TestCard/2.jpg';
 
 function MovieCardList({ searchedMovies }) {
-  console.log(searchedMovies, 'movieCardList');
+  console.log(searchedMovies, 'movieCardList,searchMovies');
+  // eslint-disable-next-line no-debugger
+  // debugger;
   const currentPath = useLocation().pathname;
   const widthScreen = useScreenWidth();
   const startSet = useStartSet(widthScreen);
-  // console.log(startSet, 'startSet');
-  // console.log(widthScreen, 'screenWIdth');
-  // console.log(widthScreen - 270, 'widthy');
 
   // добавленое
   const [count, setCount] = useState(0);
@@ -31,12 +28,8 @@ function MovieCardList({ searchedMovies }) {
   }, [searchedMovies]);
 
   function handleMovie() {
-    console.log(count);
-    console.log(searchedMovies.length);
     setStartMovies([...startMovies, ...searchedMovies.slice(count, count + startSet.step)]);
     setCount(count + startSet.step);
-    // count >= searchedMovies.length
-    // ? setButtonVisible(false)
   }
   return (
     <>
@@ -60,11 +53,34 @@ function MovieCardList({ searchedMovies }) {
       aria-label="Кнопка ещё" onClick={handleMovie} className="more-button">Ещё</button>} */}
 
       {currentPath === '/movies'
-        ? searchedMovies.length === 0
-          ? <p className="card-list__not-found">Ничего не найдено.</p>
-          : searchedMovies.length >= count
-            && <button type="button" aria-label="Кнопка ещё" onClick={handleMovie} className="more-button">Ещё</button>
-        : console.log(searchedMovies.length)}
+        && searchedMovies.length === 0
+        ? <p className="card-list__not-found">Ничего не найдено.</p>
+        : searchedMovies.length > count
+            && (
+            <button
+              type="button"
+              aria-label="Кнопка ещё"
+              onClick={handleMovie}
+              className="more-button"
+            >
+              Ещё
+            </button>
+            )}
+      {/* if (searchedMovies.length === 0  && currentPath === '/movies') {
+          <p className="card-list__not-found">Ничего не найдено.</p>
+        }
+
+        if (searchedMovies.length > count  && currentPath === movie) {
+          <button
+            type="button"
+            aria-label="Кнопка ещё"
+            onClick={handleMovie}
+            className="more-button"
+          >
+            Ещё
+          </button>
+        } */}
+
     </>
   );
 }

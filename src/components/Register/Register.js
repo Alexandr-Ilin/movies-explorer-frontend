@@ -7,10 +7,10 @@ function Register({ handleRegister }) {
   const {
     values, errors, handleChange, isValid,
   } = useForm();
-  console.log(errors);
+  console.log(values);
   function onSubmit(e) {
     e.preventDefault();
-    handleRegister();
+    handleRegister(values.nameRegister, values.EmailRegister, values.password);
   }
   return (
     <main className="main">

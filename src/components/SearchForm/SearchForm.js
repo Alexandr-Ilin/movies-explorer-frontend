@@ -2,9 +2,11 @@ import './SearchForm.css';
 import { useState } from 'react';
 import useForm from '../../utils/useForm';
 
-function SearchForm({ searchMovies }) {
-  const [isShort, setIsShort] = useState(true);
-  const { values, handleChange, errors } = useForm();
+function SearchForm({ searchMovies, isShortState }) {
+  const [isShort, setIsShort] = useState(isShortState);
+  const {
+    values, handleChange, errors, isValid,
+  } = useForm();
   console.log(values);
   console.log(errors, 'errors');
 
@@ -35,6 +37,7 @@ function SearchForm({ searchMovies }) {
             type="submit"
             className="search-form__submit"
             aria-label="Найти фильм"
+            disabled={!isValid}
           >
             Найти
           </button>

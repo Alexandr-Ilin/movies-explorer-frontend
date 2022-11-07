@@ -1,18 +1,34 @@
 import './Profile.css';
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Header from '../Header/Header';
 import useForm from '../../utils/useForm';
+import CurrentUserContext from '../../context/CurrentUserContext';
 
-function Profile({ signOut, isLogin }) {
+function Profile({ signOut, isLogin, handleUpdateUser }) {
   const [isEditing, setIsEditing] = useState(false);
-
+  const currentUser = useContext(CurrentUserContext);
   const {
-    values, errors, handleChange,
+    values, errors, handleChange, setValues, isValid,
   } = useForm();
+
+  React.useEffect(() => {
+    if (currentUser) {
+      setValues({
+        name: currentUser.name,
+        Email: currentUser.email,
+      });
+    }
+  }, [currentUser]);
 
   function handleSubmit(e) {
     e.preventDefault();
     setIsEditing(!isEditing);
+    // console.log(hanleUpdateUser, 'update');
+    handleUpdateUser(values.Email, values.name);
+    setValues({
+      name: currentUser.name,
+      Email: currentUser.email,
+    });
   }
   function handleEditClick() {
     setIsEditing(true);
@@ -24,7 +40,7 @@ function Profile({ signOut, isLogin }) {
       />
       <main className="main">
         <section className="profile-page">
-          <h1 className="profile-page__title">Привет, Виталий!</h1>
+          <h1 className="profile-page__title">{`Привет, ${currentUser.name}`}</h1>
           <form className="form-profile" onSubmit={handleSubmit}>
             <span className="form-profile__error form-profile__error_type_name">{errors.name ? 'Буквы, цифры и дефис. От 2 до 30 символов.' : ''}</span>
             <label htmlFor="name" className="form-profile__user-data">
@@ -62,7 +78,16 @@ function Profile({ signOut, isLogin }) {
             {isEditing && (
             <>
               <span className="form-profile__error-serv">serv-error</span>
-              <button type="submit" className="form-profile__submit">Сохранить</button>
+              <button
+                type="submit"
+                className="form-profile__submit"
+                disabled={
+                  !isValid
+                  || (currentUser.name === values.name && currentUser.email === values.Email)
+                }
+              >
+                Сохранить
+              </button>
             </>
             )}
           </form>

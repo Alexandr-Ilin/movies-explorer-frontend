@@ -7,11 +7,12 @@ function Login({ handleLogin }) {
   const {
     values, errors, handleChange, isValid,
   } = useForm();
-  // const regexp = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+
   function onSubmit(e) {
     e.preventDefault();
-    handleLogin();
+    handleLogin(values.EmailLogin, values.password);
   }
+
   return (
     <main className="main">
       <section className="login-page">
@@ -25,7 +26,7 @@ function Login({ handleLogin }) {
               name="EmailLogin"
               className="form-login__input"
               onChange={handleChange}
-              // autoComplete="off"
+              autoComplete="off"
               type="Email"
               pattern="^(.+)@(.+)\.(.+)$"
               value={values.EmailLogin || ''}

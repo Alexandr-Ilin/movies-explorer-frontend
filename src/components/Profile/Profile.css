@@ -104,6 +104,11 @@
   border: none;
 }
 
+.form-profile__submit:disabled {
+  opacity: .6;
+}
+
+
 .form-profile__submit:hover {
   opacity: .8;
 }

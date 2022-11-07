@@ -58,6 +58,10 @@
   transition: opacity .4s linear;
 }
 
+.search-form__submit:disabled {
+  opacity: .6;
+}
+
 .search-form__submit:hover {
   opacity: .8;
 }

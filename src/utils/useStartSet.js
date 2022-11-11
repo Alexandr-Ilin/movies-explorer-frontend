@@ -16,6 +16,6 @@ export default function useStartSet(widthScreen) {
     return startSet;
   }
   startSet.start = 5;
-  startSet.step = 5;
+  startSet.step = 2;
   return startSet;
 }

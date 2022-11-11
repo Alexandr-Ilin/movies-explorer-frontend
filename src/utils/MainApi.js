@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 class Api {
   constructor({
     baseUrl,
@@ -37,6 +36,57 @@ class Api {
         email,
         name,
       }),
+    })
+      .then(this._checkResponse);
+  }
+
+  saveClientMovie({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    nameRU,
+    nameEN,
+    id,
+  }) {
+    return fetch(this._moviesUrl, {
+      method: 'POST',
+      headers: this._headers,
+      credentials: 'include',
+      body: JSON.stringify({
+        country,
+        director,
+        duration,
+        year,
+        description,
+        image: `https://api.nomoreparties.co/${image.url}`,
+        trailerLink,
+        nameRU,
+        nameEN,
+        thumbnail: `https://api.nomoreparties.co/${image.formats.thumbnail.url}`,
+        // thumbnail,
+        movieId: id,
+      }),
+    })
+      .then(this._checkResponse);
+  }
+
+  getClientMovies() {
+    return fetch(this._moviesUrl, {
+      headers: this._headers,
+      credentials: 'include',
+    })
+      .then(this._checkResponse);
+  }
+
+  deleteClientMovie(_id) {
+    return fetch(`${this._moviesUrl}/${_id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+      credentials: 'include',
     })
       .then(this._checkResponse);
   }

@@ -14,6 +14,6 @@ export default function useForm() {
   };
 
   return {
-    values, handleChange, setValues, errors, isValid,
+    values, handleChange, setValues, errors, isValid, setIsValid,
   };
 }

@@ -1,22 +1,27 @@
 import './SearchForm.css';
-import { useState } from 'react';
+// import { useState } from 'react';
+import React from 'react';
 import useForm from '../../utils/useForm';
 
-function SearchForm({ searchMovies, isShortState }) {
-  const [isShort, setIsShort] = useState(isShortState);
+function SearchForm({ searchMovies, changeDuration, isShort }) {
+  // const isShort = true;
   const {
-    values, handleChange, errors, isValid,
+    values, handleChange, errors, isValid, setValues, setIsValid,
   } = useForm();
-  console.log(values);
-  console.log(errors, 'errors');
+
+  React.useEffect(() => {
+    setValues({ search: localStorage.getItem('searchValue') });
+    setIsValid(!isValid);
+  }, []);
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    searchMovies(values.search, isShort);
+    searchMovies(values.search);
   }
 
   function handleClick() {
-    setIsShort(!isShort);
+    // setIsShort(!isShort);
+    changeDuration();
     console.log('cheked');
   }
   return (

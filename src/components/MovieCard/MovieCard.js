@@ -2,7 +2,22 @@ import './MovieCard.css';
 import { useLocation } from 'react-router-dom';
 import MovieButton from '../MovieButton/MovieButton';
 
-function MovieCard({ card }) {
+function MovieCard({
+  card, saveMovie, deleteMovie, isSaved,
+}) {
+  console.log(card, 'card');
+
+  const savedMovie = () => isSaved.find((item) => item.movieId === card.id);
+  const savedCard = savedMovie();
+  console.log(savedCard, 'savedCard');
+
+  // const newCard = {...card, savedCard._id}
+  // const abc = saveMovie();
+  // console.log(abc, 'jjjjjjjj');
+  // console.log(savedMovie(), 'hhhhhhhhh');
+  // isSaved.forEach((item) => {if (item.movieId === card.id) {card._id = item._id}}}
+
+  console.log(savedMovie(), 'isSavedMooooooo');
   function calculateDuration(duration) {
     const hours = Math.floor(duration / 60);
     const minutes = (duration % 60) < 10
@@ -19,7 +34,9 @@ function MovieCard({ card }) {
   // debugger;
   function handleClick(evt) {
     console.log(evt);
+    deleteMovie();
   }
+
   return (
     <li className="movie-item">
       <figure className="movie-card__card">
@@ -45,7 +62,15 @@ function MovieCard({ card }) {
                 aria-label="Удалить из сохранённых"
               />
             )
-            : <MovieButton />}
+            : (
+              <MovieButton
+                // card={card}
+                card={savedCard ? { ...card, _id: savedCard._id } : card}
+                saveMovie={saveMovie}
+                deleteMovie={deleteMovie}
+                isLiked={!!savedMovie()}
+              />
+            )}
         </figcaption>
       </figure>
     </li>

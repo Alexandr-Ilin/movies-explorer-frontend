@@ -5,10 +5,9 @@ import MovieCard from '../MovieCard/MovieCard';
 import useScreenWidth from '../../utils/useWidthScreen';
 import useStartSet from '../../utils/useStartSet';
 
-function MovieCardList({ searchedMovies }) {
-  console.log(searchedMovies, 'movieCardList,searchMovies');
-  // eslint-disable-next-line no-debugger
-  // debugger;
+function MovieCardList({
+  searchedMovies, saveMovie, deleteMovie, isSavedMovies,
+}) {
   const currentPath = useLocation().pathname;
   const widthScreen = useScreenWidth();
   const startSet = useStartSet(widthScreen);
@@ -24,7 +23,6 @@ function MovieCardList({ searchedMovies }) {
 
     setStartMovies(searchedMovies.slice(start, end));
     setCount(end);
-    console.log(startMovies, 'startMovies');
   }, [searchedMovies]);
 
   function handleMovie() {
@@ -40,6 +38,9 @@ function MovieCardList({ searchedMovies }) {
              <MovieCard
                key={movieCard.id}
                card={movieCard}
+               saveMovie={saveMovie}
+               deleteMovie={deleteMovie}
+               isSaved={isSavedMovies}
               //  title={movieCard.title}
               //  duracion={movieCard.duration}
              />

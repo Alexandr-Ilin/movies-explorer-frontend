@@ -9,6 +9,9 @@ function MovieCardList({
   searchedMovies, saveMovie, deleteMovie, isSavedMovies,
 }) {
   const currentPath = useLocation().pathname;
+  console.log(searchedMovies, 'movieCardLIst');
+
+  // console.log(currentPath, 'currentPath');
   const widthScreen = useScreenWidth();
   const startSet = useStartSet(widthScreen);
 
@@ -17,71 +20,91 @@ function MovieCardList({
   const [startMovies, setStartMovies] = useState([]);
   // const [buttonVisible, setButtonVisible] = useState(true)
 
-  React.useEffect(() => {
-    const start = 0;
-    const end = startSet.start;
+  // if (currentPath === 'movie') {
+  //   const start = 0;
+  //   const end = startSet.start;
+  //   console.log('pddppdpdpdpdppdpdp');
 
-    setStartMovies(searchedMovies.slice(start, end));
-    setCount(end);
+  //   setStartMovies(searchedMovies.slice(start, end));
+  //   setCount(end);
+  // }
+
+  React.useEffect(() => {
+    if (currentPath === '/movies') {
+      const start = 0;
+      const end = startSet.start;
+
+      setStartMovies(searchedMovies.slice(start, end));
+      setCount(end);
+    }
   }, [searchedMovies]);
 
   function handleMovie() {
     setStartMovies([...startMovies, ...searchedMovies.slice(count, count + startSet.step)]);
     setCount(count + startSet.step);
   }
+
+  function moreButton() {
+    if (searchedMovies.length === 0) {
+      return <p className="card-list__not-found">Ничего не найдено.</p>;
+    }
+    if (searchedMovies.length > count) {
+      return (
+        <button
+          type="button"
+          aria-label="Кнопка ещё"
+          onClick={handleMovie}
+          className="more-button"
+        >
+          Ещё
+        </button>
+      );
+    }
+    return '';
+  }
+
   return (
     <>
       <article>
         <ul className={`card-list ${currentPath === '/saved-movies' ? 'card-list_saved-movies' : ''}`}>
-          {
-           startMovies.map((movieCard) => (
-             <MovieCard
-               key={movieCard.id}
-               card={movieCard}
-               saveMovie={saveMovie}
-               deleteMovie={deleteMovie}
-               isSaved={isSavedMovies}
-              //  title={movieCard.title}
-              //  duracion={movieCard.duration}
-             />
-           ))
-        }
+          {currentPath === '/movies'
+            ? (startMovies.map((movieCard) => (
+              <MovieCard
+                key={movieCard.id}
+                card={movieCard}
+                saveMovie={saveMovie}
+                deleteMovie={deleteMovie}
+                isSaved={isSavedMovies}
+              />
+            )))
+            : searchedMovies.map((movieCard) => (
+              <MovieCard
+                key={movieCard._id}
+                deleteMovie={deleteMovie}
+                card={movieCard}
+              />
+            ))}
+          {/* {currentPath === '/movies'
+            ? startMovies.map((movieCard) => (
+              <MovieCard
+                key={movieCard.id}
+                card={movieCard}
+                saveMovie={saveMovie}
+                deleteMovie={deleteMovie}
+                isSaved={isSavedMovies}
+              />
+            ))
+            : isSavedMovies.map((movieCard) => (
+              <MovieCard
+                key={movieCard._id}
+                deleteMovie={deleteMovie}
+                card={movieCard}
+              />
+            ))} */}
         </ul>
       </article>
-      {/* {currentPath === '/movies'
-      // eslint-disable-next-line max-len
-      && <button type="button"
-      aria-label="Кнопка ещё" onClick={handleMovie} className="more-button">Ещё</button>} */}
 
-      {currentPath === '/movies'
-        && searchedMovies.length === 0
-        ? <p className="card-list__not-found">Ничего не найдено.</p>
-        : searchedMovies.length > count
-            && (
-            <button
-              type="button"
-              aria-label="Кнопка ещё"
-              onClick={handleMovie}
-              className="more-button"
-            >
-              Ещё
-            </button>
-            )}
-      {/* if (searchedMovies.length === 0  && currentPath === '/movies') {
-          <p className="card-list__not-found">Ничего не найдено.</p>
-        }
-
-        if (searchedMovies.length > count  && currentPath === movie) {
-          <button
-            type="button"
-            aria-label="Кнопка ещё"
-            onClick={handleMovie}
-            className="more-button"
-          >
-            Ещё
-          </button>
-        } */}
-
+      {currentPath === '/movies' ? moreButton() : ''}
     </>
   );
 }

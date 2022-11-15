@@ -1,27 +1,58 @@
 import './SearchForm.css';
 // import { useState } from 'react';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import useForm from '../../utils/useForm';
+// import SavedMoviePage from '../SavedMoviePage/SavedMoviePage';
 
 function SearchForm({ searchMovies, changeDuration, isShort }) {
   // const isShort = true;
   const {
     values, handleChange, errors, isValid, setValues, setIsValid,
   } = useForm();
+  console.log(values);
+  console.log(isShort, 'isShort55555555');
+  const currentPath = useLocation().pathname;
+  const savedMoviePage = currentPath !== '/movies';
+  console.log(savedMoviePage, 'saved, sear11111');
 
   React.useEffect(() => {
-    setValues({ search: localStorage.getItem('searchValue') });
-    setIsValid(!isValid);
+    if (!savedMoviePage) {
+      const localSearch = localStorage.getItem('searchValue');
+      if (localSearch) {
+        console.log(localSearch, 'localmovied');
+        setValues({ search: localSearch });
+        setIsValid(!isValid);
+        return;
+      }
+      setIsValid(isValid);
+    }
+    const localSearch = localStorage.getItem('searchSavedValue');
+    if (localSearch) {
+      console.log(localSearch, 'savedlocalmovied');
+      setValues({ searchSavedMovies: localSearch });
+      setIsValid(!isValid);
+      return;
+    }
+    setIsValid(isValid);
   }, []);
+
+  // React.useEffect(() => {
+  //   setValues({ search: localStorage.getItem('searchValue') });
+  //   console.log(values);
+  //   console.log(isValid);
+
+  //   setIsValid(values.search ? !isValid : isValid);
+  // }, []);
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    searchMovies(values.search);
+    searchMovies(currentPath === '/movies' ? values.search : values.searchSavedMovies, savedMoviePage);
   }
 
   function handleClick() {
     // setIsShort(!isShort);
-    changeDuration();
+    changeDuration(savedMoviePage);
     console.log('cheked');
   }
   return (
@@ -32,8 +63,8 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
             type="text"
             className="search-form__input"
             placeholder="Фильм"
-            name="search"
-            value={values.search || ''}
+            name={currentPath === '/movies' ? 'search' : 'searchSavedMovies'}
+            value={currentPath === '/movies' ? values.search || '' : values.searchSavedMovies || ''}
             onChange={handleChange}
             required
           />
@@ -56,6 +87,12 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
           />
           <p className="search-form__button-subtitle">Короткометражки</p>
         </div>
+        {/* <div className="search-form__radio-wrapper-new">
+          <label htmlFor="short" className="search-form__label-new">
+            <input type="radio" name="short" value="false" onChange={handleChange} />
+            <input type="radio" name="short" value="true" checked="true" onChange={handleChange} />
+          </label>
+        </div> */}
       </form>
     </div>
   );

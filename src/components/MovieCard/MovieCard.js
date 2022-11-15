@@ -5,11 +5,20 @@ import MovieButton from '../MovieButton/MovieButton';
 function MovieCard({
   card, saveMovie, deleteMovie, isSaved,
 }) {
-  console.log(card, 'card');
+  const currentPath = useLocation().pathname;
+  // console.log(card, 'card');
 
-  const savedMovie = () => isSaved.find((item) => item.movieId === card.id);
-  const savedCard = savedMovie();
-  console.log(savedCard, 'savedCard');
+  // const savedMovie = () => isSaved.find((item) => item.movieId === card.id);
+  // const savedCard = savedMovie();
+  const getSavedCard = () => {
+    if (currentPath === '/movies') {
+      return isSaved.find((item) => item.movieId === card.id);
+    }
+    return card;
+  };
+
+  const savedCard = getSavedCard();
+  // console.log(savedCard, 'savedCard');
 
   // const newCard = {...card, savedCard._id}
   // const abc = saveMovie();
@@ -17,7 +26,7 @@ function MovieCard({
   // console.log(savedMovie(), 'hhhhhhhhh');
   // isSaved.forEach((item) => {if (item.movieId === card.id) {card._id = item._id}}}
 
-  console.log(savedMovie(), 'isSavedMooooooo');
+  // console.log(savedMovie(), 'isSavedMooooooo');
   function calculateDuration(duration) {
     const hours = Math.floor(duration / 60);
     const minutes = (duration % 60) < 10
@@ -29,12 +38,11 @@ function MovieCard({
       : `0ч${minutes}м`;
   }
 
-  const currentPath = useLocation().pathname;
   //  console.log(card, 'card');
   // debugger;
   function handleClick(evt) {
     console.log(evt);
-    deleteMovie();
+    deleteMovie(card);
   }
 
   return (
@@ -43,7 +51,7 @@ function MovieCard({
         <a className="movie-card__trailer-link" href={card.trailerLink} target="blank">
           <img
             className="movie-card__image"
-            src={`https://api.nomoreparties.co/${card.image.url}`}
+            src={currentPath === '/movies' ? `https://api.nomoreparties.co/${card.image.url}` : card.image}
             alt={card.nameRU}
           />
         </a>
@@ -68,7 +76,7 @@ function MovieCard({
                 card={savedCard ? { ...card, _id: savedCard._id } : card}
                 saveMovie={saveMovie}
                 deleteMovie={deleteMovie}
-                isLiked={!!savedMovie()}
+                isLiked={!!savedCard}
               />
             )}
         </figcaption>

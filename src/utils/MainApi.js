@@ -1,4 +1,4 @@
-class Api {
+class MainApi {
   constructor({
     baseUrl,
     headers,
@@ -12,12 +12,15 @@ class Api {
   // eslint-disable-next-line class-methods-use-this
   _checkResponse(res) {
     if (res.ok) {
+      console.log('я пришел на регистрацию');
       return res.json();
     }
+    console.log('не прошел');
     return Promise.reject(new Error(`Ошибка: ${res.status}`));
   }
 
   getUserData() {
+    console.log('брал данные');
     return fetch(this._userUrl, {
       headers: this._headers,
       credentials: 'include',
@@ -92,7 +95,7 @@ class Api {
   }
 }
 
-const api = new Api({
+const api = new MainApi({
   baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json',

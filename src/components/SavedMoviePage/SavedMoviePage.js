@@ -3,16 +3,25 @@ import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 import MovieCardList from '../MovieCardList/MovieCardList';
 
-function MoviePage({ isLogin, isSavedMovies }) {
+function SavedMoviePage({
+  isLogin, deleteMovie, searchMovies, changeDuration, isShort, searchedMovies,
+}) {
+  console.log(searchedMovies, 'movieSavedPage');
   return (
     <>
       <Header
         isLogin={isLogin}
       />
       <main className="main">
-        <SearchForm />
+        <SearchForm
+          searchMovies={searchMovies}
+          changeDuration={changeDuration}
+          isShort={isShort}
+        />
         <MovieCardList
-          searchedMovies={isSavedMovies}
+          // isSavedMovies={isSavedMovies}
+          searchedMovies={searchedMovies}
+          deleteMovie={deleteMovie}
         />
       </main>
       <Footer />
@@ -20,4 +29,4 @@ function MoviePage({ isLogin, isSavedMovies }) {
   );
 }
 
-export default MoviePage;
+export default SavedMoviePage;

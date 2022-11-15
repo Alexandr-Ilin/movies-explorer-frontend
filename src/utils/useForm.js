@@ -10,6 +10,7 @@ export default function useForm() {
     const { value, name } = event.target;
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: input.validationMessage });
+    console.log(input.closest('form', '12345465'));
     setIsValid(input.closest('form').checkValidity());
   };
 

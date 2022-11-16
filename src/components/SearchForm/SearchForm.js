@@ -7,7 +7,7 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
   const {
     values, handleChange, errors, isValid, setValues, setIsValid,
   } = useForm();
-  console.log(errors.searchSavedMovies);
+  // console.log(errors.searchSavedMovies);
   const currentPath = useLocation().pathname;
   const savedMoviePage = currentPath !== '/movies';
 
@@ -29,16 +29,21 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
     }
     setIsValid(isValid);
   }, []);
+  console.log(localStorage.durationMovies);
 
   function handleSubmit(evt) {
     evt.preventDefault();
     searchMovies(currentPath === '/movies' ? values.search : values.searchSavedMovies, savedMoviePage);
   }
 
-  function handleClick(evt) {
+  console.log(isShort);
+
+  function handleClick() {
+    console.log(isShort);
     changeDuration(savedMoviePage);
-    handleSubmit(evt);
+    // handleSubmit(evt);
   }
+
   return (
     <div className="search-form">
       <form className="search-form__form" onSubmit={handleSubmit}>
@@ -65,7 +70,7 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
         </div>
         <div className="search-form__radio-wrapper">
           <button
-            type="submit"
+            type="button"
             aria-label={isShort ? 'Выбрать короткометражки' : 'Выбрать любые фильмы'}
             className={`search-form__radio ${isShort ? 'search-form__radio_marked' : 'search-form__radio_not-marked'}`}
             onClick={handleClick}

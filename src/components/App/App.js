@@ -20,6 +20,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import ProtectedRouteAuth from '../ProtectedRoute/ProtectedRouteAuth';
 import Preloader from '../Preloader/Preloader';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import searchShortMovies from '../../utils/utils';
 
 function App() {
   const path = useNavigate();
@@ -27,7 +28,7 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
 
-  const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin') || false);
+  // const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin') || false);
 
   // все фильмы
   // const [allMovies, setAllMovies] = useState([]);
@@ -37,39 +38,46 @@ function App() {
   //   ? JSON.parse(localStorage.moviesSearch)
   //   : []);
 
-  // состояние кнопки выбора длительности фильмов
-  const [isShort, setIsShort] = useState(localStorage.getItem('moviesDuration')
-    ? JSON.parse(localStorage.moviesDuration)
-    : { value: true });
+  // // состояние кнопки выбора длительности фильмов
+  // const [isShort, setIsShort] = useState(localStorage.getItem('duration')
+  //   ? JSON.parse(localStorage.moviesDuration)
+  //   : { value: true });
 
-  // загрузка результата поиска в сохраненных пользователем фильмов
-  const [searchedSavedMovies, setSearchedSavedMovies] = useState(localStorage.getItem('moviesSavedSearch')
-    ? JSON.parse(localStorage.moviesSavedSearch)
-    : []);
+  // // загрузка результата поиска в сохраненных пользователем фильмов
+  // eslint-disable-next-line max-len
+  // const [searchedSavedMovies, setSearchedSavedMovies] = useState(localStorage.getItem('moviesSavedSearch')
+  //   ? JSON.parse(localStorage.moviesSavedSearch)
+  //   : []);
 
-  // состояние кнопки выбора длительности фильмов на странице выбраных фильмов, но это не нужно
-  const [isSavedMoviesShort, setIsSavedMoviesShort] = useState(
-    localStorage.getItem('moviesSavedDuration')
-      ? JSON.parse(localStorage.moviesSavedDuration)
-      : { value: true },
-  );
+  // // состояние кнопки выбора длительности фильмов на странице выбраных фильмов, но это не нужно
+  // const [isSavedMoviesShort, setIsSavedMoviesShort] = useState(
+  //   localStorage.getItem('moviesSavedDuration')
+  //     ? JSON.parse(localStorage.moviesSavedDuration)
+  //     : { value: true },
+  // );
 
   // Фильмы сохраненные пользователем все
   const [isSavedMovies, setIsSavedMovies] = useState([]);
 
-  // preloader
-  const [isPreloader, setIsPreloader] = useState(null);
-
-  // ошибки
-  const [isError, setIsError] = useState(null);
-
-  // редактирование профиля
-  const [isEditing, setIsEditing] = useState(false);
-
   // popup InfoToolTip
   const [isInfoTooltipPopupOpen, setIsTooltipPopupOpen] = useState(false);
-
-  const [renderCard, setRenderCard] = useState()
+  // //// //// ///
+  // сохраненные карточки которые выводятся
+  const [cardMoviesDisplay, setCardMoviesDisplay] = useState(localStorage.moviesFound
+    ? JSON.parse(localStorage.moviesFound) : []);
+  const [cardSavedMoviesDisplay, setCardSavedMoviesDisplay] = useState(localStorage.moviesSavedFound
+    ? JSON.parse(localStorage.movieSavedFound) : []);
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin'));
+  // ошибки
+  const [isError, setIsError] = useState(null);
+  // preloader
+  const [isPreloader, setIsPreloader] = useState(null);
+  // редактирование профиля
+  const [isEditing, setIsEditing] = useState(false);
+  // длительность всех фильмов
+  const [durationMovies, setDurationMovies] = useState(false);
+  // длительность сохраненных фильмов
+  const [durationSavedMovies, setDurationSavedMovies] = useState(false);
 
   const editProfileButton = () => {
     setIsEditing(!isEditing);
@@ -88,12 +96,6 @@ function App() {
     resetEditingProfile();
     setIsTooltipPopupOpen(false);
   };
-
-  function searchShortMovies(movies, duration) {
-    return duration.value
-      ? movies.filter((movie) => movie.duration <= 40)
-      : movies.filter((movie) => movie.duration > 40);
-  }
 
   const alertErrorMessage = (err) => (err.message === 'Failed to fetch'
     ? { message: 'На сервере произошла ошибка. Попробуйте ещё раз.' }
@@ -116,15 +118,16 @@ function App() {
     setTimeout(() => { setIsPreloader(false); }, 500);
   };
 
-  const searchMovies = (movies, searchValue, pageSavedmovies) => {
+  const searchMovies = (movies, searchValue, pageSavedMovies) => {
     startPreloader();
 
-    if (!searchValue && pageSavedmovies) {
-      setIsSavedMovies(movies || []);
+    if (!searchValue && pageSavedMovies) {
+      // setIsSavedMovies(movies || []);
       stopPreloader();
       return;
     }
     console.log(movies, 'movies');
+    console.log(searchValue, 'movies');
     const searchList = movies.filter((movie) => {
       const movieNameRU = movie.nameRU.toLowerCase();
       const movieNameEN = movie.nameEN.toLowerCase();
@@ -133,21 +136,24 @@ function App() {
 
       return resultRU || resultEN;
     });
-    if (!pageSavedmovies) {
-      const short = JSON.parse(localStorage.moviesDuration) || ;
-      // console.log(short.value, 'short-movie-duration');
-      localStorage.setItem('moviesSearch', JSON.stringify(searchShortMovies(searchList, short)));
+    if (!pageSavedMovies) {
+      console.log(searchList, 'searchList');
+      localStorage.setItem('moviesFound', localStorage.durationMovies
+        ? JSON.stringify(searchShortMovies(searchList))
+        : JSON.stringify(searchList));
       // localStorage.setItem('moviesDuration', JSON.stringify(isShort));
-      localStorage.setItem('searchValue', searchValue);
-      // setSearchedMovies(short.value ? searchShortMovies(searchList) : searchList);
+      localStorage.setItem('valueSearch', searchValue);
+      // eslint-disable-next-line max-len
+      // setSearchedMovies(localStorage.durationMovies ? searchShortMovies(searchList) : searchList);
       stopPreloader();
       return;
     }
-    const short = JSON.parse(localStorage.moviesSavedDuration);
+
+    // const short = JSON.parse(localStorage.moviesSavedDuration);
     // console.log(short, 'short-Saved-movies');
-    localStorage.setItem('moviesSavedSearch', JSON.stringify(searchShortMovies(searchList, short)));
+    localStorage.setItem('moviesSavedFound', JSON.stringify(searchShortMovies(searchList)));
     // localStorage.setItem('moviesSavedDuration', JSON.stringify(isSavedMoviesShort));
-    localStorage.setItem('searchSavedValue', searchValue);
+    localStorage.setItem('valueSearchSaved', searchValue);
     // setSearchedSavedMovies(short.value ? searchShortMovies(searchList) : searchList);
     stopPreloader();
   };
@@ -158,9 +164,7 @@ function App() {
       MainApi
         .getUserData()
         .then((res) => {
-        // setIsLogin(true);
           setCurrentUser(res.data);
-        // localStorage.setItem('isLogin', true);
         })
         .catch((err) => {
           console.log(err);
@@ -200,7 +204,7 @@ function App() {
           openPopup();
         });
     }
-    console.log(JSON.parse(localStorage.allMovies));
+    console.log(localStorage.allMovies ? JSON.parse(localStorage.allMovies) : []);
     searchMovies(JSON.parse(localStorage.allMovies), searchValue);
   };
 
@@ -285,14 +289,14 @@ function App() {
   // const hendleIsShort
   const changeDuration = (savedMoviePage) => {
     if (savedMoviePage) {
-      const duration = { value: !isSavedMoviesShort.value };
-      setIsSavedMoviesShort(duration);
-      localStorage.setItem('moviesSavedDuration', JSON.stringify(duration));
-      return;
+      setDurationSavedMovies(!durationSavedMovies);
+      localStorage.setItem('durationSavedMovies', JSON.stringify({ value:  }));
     }
-    const duration = { value: !isShort.value };
-    setIsShort(duration);
-    localStorage.setItem('moviesDuration', JSON.stringify(duration));
+    setDurationMovies(!durationMovies);
+    if (localStorage.durationMovies) {
+      return localStorage.removeItem('durationMovies');
+    }
+    return localStorage.setItem('durationMovies', true);
   };
 
   const saveMovie = (card) => {
@@ -395,14 +399,15 @@ function App() {
               element={(
                 <SavedMoviePage
                   isLogin={isLogin}
-                  searchedMovies={localStorage.getItem('moviesSavedSearch') ? JSON.parse(localStorage.moviesSavedSearch) : JSON.parse(localStorage.allSavedMovies)}
-                  // // searchedMovies={localStorage.getItem('moviesSavedSearch')
+                  searchedMovies={cardSavedMoviesDisplay}
+                  // eslint-disable-next-line max-len
+                  // searchedMovies={localStorage.getItem('moviesSavedSearch') ? JSON.parse(localStorage.moviesSavedSearch) : JSON.parse(localStorage.allSavedMovies)}
                   // ? JSON.parse(localStorage.moviesSavedSearch) :
                   //  []}
                   deleteMovie={deleteMovie}
                   changeDuration={changeDuration}
                   searchMovies={handleSearchSavedMovies}
-                  isShort={isSavedMoviesShort.value}
+                  isShort={durationSavedMovies}
                 />
             )}
             />
@@ -412,13 +417,13 @@ function App() {
               element={(
                 <MoviePage
                   isLogin={isLogin}
-                  // searchedMovies={[]}
-                  searchedMovies={localStorage.getItem('moviesSearch')
-                    ? JSON.parse(localStorage.moviesSearch)
-                    : []}
+                  searchedMovies={cardMoviesDisplay}
+                  // searchedMovies={localStorage.getItem('moviesFound')
+                  //   ? JSON.parse(localStorage.moviesFound)
+                  //   : []}
                   searchMovies={handleSearchMovies}
                   changeDuration={changeDuration}
-                  isShort={isShort.value}
+                  isShort={durationMovies}
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
                   isSavedMovies={isSavedMovies}

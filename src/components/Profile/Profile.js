@@ -1,11 +1,17 @@
 import './Profile.css';
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import Header from '../Header/Header';
 import useForm from '../../utils/useForm';
 import CurrentUserContext from '../../context/CurrentUserContext';
 
-function Profile({ signOut, isLogin, handleUpdateUser }) {
-  const [isEditing, setIsEditing] = useState(false);
+function Profile({
+  signOut,
+  isLogin,
+  handleUpdateUser,
+  isError,
+  isEditing,
+  editProfileButton,
+}) {
   const currentUser = useContext(CurrentUserContext);
   const {
     values, errors, handleChange, setValues, isValid,
@@ -22,8 +28,6 @@ function Profile({ signOut, isLogin, handleUpdateUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setIsEditing(!isEditing);
-    // console.log(hanleUpdateUser, 'update');
     handleUpdateUser(values.Email, values.name);
     setValues({
       name: currentUser.name,
@@ -31,7 +35,7 @@ function Profile({ signOut, isLogin, handleUpdateUser }) {
     });
   }
   function handleEditClick() {
-    setIsEditing(true);
+    editProfileButton();
   }
   return (
     <>
@@ -77,7 +81,7 @@ function Profile({ signOut, isLogin, handleUpdateUser }) {
             <span className="form-profile__error form-profile__error_type_email">{errors.Email ? 'Введите адрес электронной почты' : ''}</span>
             {isEditing && (
             <>
-              <span className="form-profile__error-serv">serv-error</span>
+              <span className="form-profile__error-serv">{isError !== null ? isError.message : ''}</span>
               <button
                 type="submit"
                 className="form-profile__submit"

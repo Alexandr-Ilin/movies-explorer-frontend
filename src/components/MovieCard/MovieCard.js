@@ -3,30 +3,25 @@ import { useLocation } from 'react-router-dom';
 import MovieButton from '../MovieButton/MovieButton';
 
 function MovieCard({
-  card, saveMovie, deleteMovie, isSaved,
+  card, saveMovie, deleteMovie,
 }) {
   const currentPath = useLocation().pathname;
-  // console.log(card, 'card');
 
-  // const savedMovie = () => isSaved.find((item) => item.movieId === card.id);
-  // const savedCard = savedMovie();
+  console.log(card, 'cardergg');
+
   const getSavedCard = () => {
+    // в константы!!!!!!!!!!!!
+    const ALL_SAVED_MOVIES = JSON.parse(localStorage.allSavedMovies);
+    console.log(ALL_SAVED_MOVIES);
     if (currentPath === '/movies') {
-      return isSaved.find((item) => item.movieId === card.id);
+      return ALL_SAVED_MOVIES.find((item) => item.movieId === card.id);
     }
     return card;
   };
 
   const savedCard = getSavedCard();
-  // console.log(savedCard, 'savedCard');
+  console.log(savedCard);
 
-  // const newCard = {...card, savedCard._id}
-  // const abc = saveMovie();
-  // console.log(abc, 'jjjjjjjj');
-  // console.log(savedMovie(), 'hhhhhhhhh');
-  // isSaved.forEach((item) => {if (item.movieId === card.id) {card._id = item._id}}}
-
-  // console.log(savedMovie(), 'isSavedMooooooo');
   function calculateDuration(duration) {
     const hours = Math.floor(duration / 60);
     const minutes = (duration % 60) < 10
@@ -38,10 +33,7 @@ function MovieCard({
       : `0ч${minutes}м`;
   }
 
-  //  console.log(card, 'card');
-  // debugger;
-  function handleClick(evt) {
-    console.log(evt);
+  function handleClick() {
     deleteMovie(card);
   }
 
@@ -72,7 +64,6 @@ function MovieCard({
             )
             : (
               <MovieButton
-                // card={card}
                 card={savedCard ? { ...card, _id: savedCard._id } : card}
                 saveMovie={saveMovie}
                 deleteMovie={deleteMovie}

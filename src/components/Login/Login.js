@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import useForm from '../../utils/useForm';
 
-function Login({ handleLogin }) {
+function Login({ handleLogin, isError }) {
   const {
     values, errors, handleChange, isValid,
   } = useForm();
@@ -50,6 +50,7 @@ function Login({ handleLogin }) {
             />
             <span className="form-login__error">{errors.password ? 'Пароль от 2 до 20 символов' : ''}</span>
           </label>
+          <span className="form-login__error-serv">{isError ? isError.message : ''}</span>
           <button type="submit" className="form-login__submit" disabled={!isValid}>Войти</button>
         </form>
         <p className="login-page__text">

@@ -9,25 +9,10 @@ function MovieCardList({
   searchedMovies, saveMovie, deleteMovie, isSavedMovies,
 }) {
   const currentPath = useLocation().pathname;
-  console.log(searchedMovies, 'movieCardLIst');
-
-  // console.log(currentPath, 'currentPath');
   const widthScreen = useScreenWidth();
   const startSet = useStartSet(widthScreen);
-
-  // добавленое
   const [count, setCount] = useState(0);
   const [startMovies, setStartMovies] = useState([]);
-  // const [buttonVisible, setButtonVisible] = useState(true)
-
-  // if (currentPath === 'movie') {
-  //   const start = 0;
-  //   const end = startSet.start;
-  //   console.log('pddppdpdpdpdppdpdp');
-
-  //   setStartMovies(searchedMovies.slice(start, end));
-  //   setCount(end);
-  // }
 
   React.useEffect(() => {
     if (currentPath === '/movies') {
@@ -45,9 +30,6 @@ function MovieCardList({
   }
 
   function moreButton() {
-    if (searchedMovies.length === 0) {
-      return <p className="card-list__not-found">Ничего не найдено.</p>;
-    }
     if (searchedMovies.length > count) {
       return (
         <button
@@ -84,26 +66,9 @@ function MovieCardList({
                 card={movieCard}
               />
             ))}
-          {/* {currentPath === '/movies'
-            ? startMovies.map((movieCard) => (
-              <MovieCard
-                key={movieCard.id}
-                card={movieCard}
-                saveMovie={saveMovie}
-                deleteMovie={deleteMovie}
-                isSaved={isSavedMovies}
-              />
-            ))
-            : isSavedMovies.map((movieCard) => (
-              <MovieCard
-                key={movieCard._id}
-                deleteMovie={deleteMovie}
-                card={movieCard}
-              />
-            ))} */}
         </ul>
       </article>
-
+      <p className="card-list__not-found">{searchedMovies.length === 0 ? 'Ничего не найдено.' : ''}</p>
       {currentPath === '/movies' ? moreButton() : ''}
     </>
   );

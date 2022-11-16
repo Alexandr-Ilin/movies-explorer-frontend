@@ -1,26 +1,20 @@
 import './SearchForm.css';
-// import { useState } from 'react';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import useForm from '../../utils/useForm';
-// import SavedMoviePage from '../SavedMoviePage/SavedMoviePage';
 
 function SearchForm({ searchMovies, changeDuration, isShort }) {
-  // const isShort = true;
   const {
     values, handleChange, errors, isValid, setValues, setIsValid,
   } = useForm();
-  console.log(values);
-  console.log(isShort, 'isShort55555555');
+  console.log(errors.searchSavedMovies);
   const currentPath = useLocation().pathname;
   const savedMoviePage = currentPath !== '/movies';
-  console.log(savedMoviePage, 'saved, sear11111');
 
   React.useEffect(() => {
     if (!savedMoviePage) {
       const localSearch = localStorage.getItem('searchValue');
       if (localSearch) {
-        console.log(localSearch, 'localmovied');
         setValues({ search: localSearch });
         setIsValid(!isValid);
         return;
@@ -29,7 +23,6 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
     }
     const localSearch = localStorage.getItem('searchSavedValue');
     if (localSearch) {
-      console.log(localSearch, 'savedlocalmovied');
       setValues({ searchSavedMovies: localSearch });
       setIsValid(!isValid);
       return;
@@ -37,23 +30,14 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
     setIsValid(isValid);
   }, []);
 
-  // React.useEffect(() => {
-  //   setValues({ search: localStorage.getItem('searchValue') });
-  //   console.log(values);
-  //   console.log(isValid);
-
-  //   setIsValid(values.search ? !isValid : isValid);
-  // }, []);
-
   function handleSubmit(evt) {
     evt.preventDefault();
     searchMovies(currentPath === '/movies' ? values.search : values.searchSavedMovies, savedMoviePage);
   }
 
-  function handleClick() {
-    // setIsShort(!isShort);
+  function handleClick(evt) {
     changeDuration(savedMoviePage);
-    console.log('cheked');
+    handleSubmit(evt);
   }
   return (
     <div className="search-form">
@@ -68,7 +52,8 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
             onChange={handleChange}
             required
           />
-          <span className="search-form__error">{errors.search}</span>
+          {/* <span className="search-form__error">uiuiiuiui</span> */}
+          <span className="search-form__error">{!savedMoviePage ? errors.search : errors.searchSavedMovies}</span>
           <button
             type="submit"
             className="search-form__submit"
@@ -80,19 +65,14 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
         </div>
         <div className="search-form__radio-wrapper">
           <button
-            type="button"
+            type="submit"
             aria-label={isShort ? 'Выбрать короткометражки' : 'Выбрать любые фильмы'}
             className={`search-form__radio ${isShort ? 'search-form__radio_marked' : 'search-form__radio_not-marked'}`}
             onClick={handleClick}
+            disabled={!isValid}
           />
           <p className="search-form__button-subtitle">Короткометражки</p>
         </div>
-        {/* <div className="search-form__radio-wrapper-new">
-          <label htmlFor="short" className="search-form__label-new">
-            <input type="radio" name="short" value="false" onChange={handleChange} />
-            <input type="radio" name="short" value="true" checked="true" onChange={handleChange} />
-          </label>
-        </div> */}
       </form>
     </div>
   );

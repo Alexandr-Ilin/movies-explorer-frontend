@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import useForm from '../../utils/useForm';
 
-function Register({ handleRegister }) {
+function Register({ handleRegister, isError }) {
   const {
     values, errors, handleChange, isValid,
   } = useForm();
-  console.log(values);
   function onSubmit(e) {
     e.preventDefault();
     handleRegister(values.nameRegister, values.EmailRegister, values.password);
@@ -30,7 +29,6 @@ function Register({ handleRegister }) {
               onChange={handleChange}
               value={values.nameRegister || ''}
               pattern="^[A-Za-zа-яА-ЯёЁ0-9-\s]+$"
-              // disabled={!isEditing && true}
               required
             />
             <span className="form-register__error">
@@ -68,6 +66,7 @@ function Register({ handleRegister }) {
             />
             <span className="form-register__error">{errors.password ? 'Пароль от 2 до 20 символов' : ''}</span>
           </label>
+          <span className="form-register__error-serv">{isError ? isError.message : ''}</span>
           <button type="submit" className="form-register__submit" disabled={!isValid}>Зарегистрироваться</button>
         </form>
         <p className="register-page__text">

@@ -6,7 +6,6 @@ import MovieCardList from '../MovieCardList/MovieCardList';
 function SavedMoviePage({
   isLogin, deleteMovie, searchMovies, changeDuration, isShort, searchedMovies,
 }) {
-  console.log(searchedMovies, 'movieSavedPage');
   return (
     <>
       <Header

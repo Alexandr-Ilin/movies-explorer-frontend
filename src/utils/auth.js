@@ -7,6 +7,7 @@ const checkResponse = (res) => {
   }
   return res.json()
     .then((err) => {
+      console.log(err, 'ошибка авторизации');
       throw err;
     });
 };

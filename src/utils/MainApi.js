@@ -9,28 +9,24 @@ class MainApi {
     this._headers = headers;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  _checkResponse(res) {
+  static _checkResponse = (res) => {
     if (res.ok) {
-      console.log('я пришел на регистрацию');
       return res.json();
     }
-    console.log('не прошел');
-    return Promise.reject(new Error(`Ошибка: ${res.status}`));
-  }
+    return res.json()
+      .then((result) => Promise.reject(new Error(result.message)));
+  };
 
   getUserData() {
-    console.log('брал данные');
     return fetch(this._userUrl, {
       headers: this._headers,
       credentials: 'include',
     })
-      .then(this._checkResponse);
+      .then(MainApi._checkResponse);
   }
 
   //  отправка данных пользователя на сервер
   changeUserData(email, name) {
-    console.log(email, name, 'change');
     return fetch(this._userUrl, {
       method: 'PATCH',
       headers: this._headers,
@@ -40,7 +36,7 @@ class MainApi {
         name,
       }),
     })
-      .then(this._checkResponse);
+      .then(MainApi._checkResponse);
   }
 
   saveClientMovie({
@@ -82,7 +78,7 @@ class MainApi {
       headers: this._headers,
       credentials: 'include',
     })
-      .then(this._checkResponse);
+      .then(MainApi._checkResponse);
   }
 
   deleteClientMovie(_id) {
@@ -91,7 +87,7 @@ class MainApi {
       headers: this._headers,
       credentials: 'include',
     })
-      .then(this._checkResponse);
+      .then(MainApi._checkResponse);
   }
 }
 

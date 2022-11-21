@@ -4,26 +4,32 @@ import {
   ERROR_CONFLICT,
   ERROR_UNAUTHORIZED,
   ERROR_SERVER,
+  MESSAGE_CONFLICT,
+  MESSAGE_FAILED_TO_FETCH,
+  MESSAGE_UNAUTHORIZED,
+  MESSAGE_UNAUTHORIZED_LOGIN,
+  MESSAGE_SERVER_ERROR,
+  MESSAGE_BAD_REQUEST,
 } from './consts';
 
 function alertErrorMessage(err, path) {
   if (err.message === ERROR_CONFLICT) {
-    return { message: 'Пользователь с таким email уже существует' };
+    return { message: MESSAGE_CONFLICT };
   }
   if (err.message === ERROR_FAILED_TO_FETCH) {
-    return { message: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз' };
+    return { message: MESSAGE_FAILED_TO_FETCH };
   }
   if (err.message === ERROR_UNAUTHORIZED && path !== '/signin') {
-    return { message: 'Вы не авторизованы.' };
+    return { message: MESSAGE_UNAUTHORIZED };
   }
   if (err.message === ERROR_UNAUTHORIZED && path === '/signin') {
-    return { message: 'Вы ввели неправильный логин или пароль.' };
+    return { message: MESSAGE_UNAUTHORIZED_LOGIN };
   }
   if (err.message === ERROR_SERVER) {
-    return { message: 'Ошибка сервера.' };
+    return { message: MESSAGE_SERVER_ERROR };
   }
   if (err.message === ERROR_BAD_REQUEST) {
-    return { message: 'Введены некорректные данные.' };
+    return { message: MESSAGE_BAD_REQUEST };
   }
   return { message: err.message };
 }

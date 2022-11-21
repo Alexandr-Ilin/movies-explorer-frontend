@@ -13,6 +13,7 @@ export const MESSAGE_FAILED_TO_FETCH = 'Во время запроса прои�
 export const MESSAGE_UNAUTHORIZED = 'Вы не авторизированы';
 export const MESSAGE_CONFLICT = 'Пользователь с таким email уже существует.';
 export const MESSAGE_UNAUTHORIZED_LOGIN = 'Неверный логин или пароль';
+export const MESSAGE_SERVER_ERROR = 'Ошибка сервера.';
 
 export const MESSAGE_VALIDATION_EMAIL = 'Введите адрес электронной почты.';
 export const MESSAGE_VALIDATION_PASSWORD = 'Пароль от 2 до 20 символов.';

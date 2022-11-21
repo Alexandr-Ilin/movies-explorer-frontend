@@ -14,78 +14,61 @@ import Profile from '../Profile/Profile';
 import MoviePage from '../MoviePage/MoviePage';
 import SavedMoviePage from '../SavedMoviePage/SavedMoviePage';
 import moviesApi from '../../utils/MoviesApi';
-import MainApi from '../../utils/MainApi';
+import mainApi from '../../utils/MainApi';
 import { register, exitUserProfile, authorize } from '../../utils/auth';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import ProtectedRouteAuth from '../ProtectedRoute/ProtectedRouteAuth';
 import Preloader from '../Preloader/Preloader';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import searchShortMovies from '../../utils/utils';
+import alertErrorMessage from '../../utils/utils';
+import { DURATION_SHORT, MESSAGE_UPDATE_USER, MESSAGE_FAILED_TO_FETCH } from '../../utils/consts';
 
 function App() {
   const path = useNavigate();
+
   // const currentPath = useLocation().pathname;
-
   const [currentUser, setCurrentUser] = useState({});
-
-  // const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin') || false);
-
-  // все фильмы
-  // const [allMovies, setAllMovies] = useState([]);
-
-  // фильмы после поиска, в результате поиска среди всех фильмов
-  // const [searchedMovies, setSearchedMovies] = useState(localStorage.getItem('moviesSearch')
-  //   ? JSON.parse(localStorage.moviesSearch)
-  //   : []);
-
-  // // состояние кнопки выбора длительности фильмов
-  // const [isShort, setIsShort] = useState(localStorage.getItem('duration')
-  //   ? JSON.parse(localStorage.moviesDuration)
-  //   : { value: true });
-
-  // // загрузка результата поиска в сохраненных пользователем фильмов
-  // eslint-disable-next-line max-len
-  // const [searchedSavedMovies, setSearchedSavedMovies] = useState(localStorage.getItem('moviesSavedSearch')
-  //   ? JSON.parse(localStorage.moviesSavedSearch)
-  //   : []);
-
-  // // состояние кнопки выбора длительности фильмов на странице выбраных фильмов, но это не нужно
-  // const [isSavedMoviesShort, setIsSavedMoviesShort] = useState(
-  //   localStorage.getItem('moviesSavedDuration')
-  //     ? JSON.parse(localStorage.moviesSavedDuration)
-  //     : { value: true },
-  // );
-
-  // Фильмы сохраненные пользователем все
-  const [isSavedMovies, setIsSavedMovies] = useState([]);
-
   // popup InfoToolTip
   const [isInfoTooltipPopupOpen, setIsTooltipPopupOpen] = useState(false);
-  // //// //// ///
-  // сохраненные карточки которые выводятся
+  // Все фильмы сохраненные пользователем
+  const [allSavedMovies, setAllSavedMovies] = useState(localStorage.allSavedMovies
+    ? JSON.parse(localStorage.allSavedMovies)
+    : []);
+  // карточки которые выводятся
   const [cardMoviesDisplay, setCardMoviesDisplay] = useState(localStorage.moviesFound
-    ? JSON.parse(localStorage.moviesFound) : []);
-  const [cardSavedMoviesDisplay, setCardSavedMoviesDisplay] = useState(localStorage.moviesSavedFound
-    ? JSON.parse(localStorage.movieSavedFound) : []);
+    ? JSON.parse(localStorage.moviesFound)
+    : []);
+  // вывод сохраненных карточек
+  const [cardSavedMoviesDisplay, setCardSavedMoviesDisplay] = useState(
+    localStorage.moviesSavedFound
+      ? JSON.parse(localStorage.moviesSavedFound)
+      : [],
+  );
   const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin'));
-  // ошибки
-  const [isError, setIsError] = useState(null);
+  // сообщения ошибок
+  const [isInfoMessage, setIsInfoMessage] = useState(null);
+  // состояние ошибок
+  const [isError, setIsError] = useState(false);
   // preloader
   const [isPreloader, setIsPreloader] = useState(null);
   // редактирование профиля
   const [isEditing, setIsEditing] = useState(false);
   // длительность всех фильмов
-  const [durationMovies, setDurationMovies] = useState(false);
+  const [durationMovies, setDurationMovies] = useState(localStorage.durationMovies
+    ? JSON.parse(localStorage.durationMovies)
+    : { value: false });
   // длительность сохраненных фильмов
-  const [durationSavedMovies, setDurationSavedMovies] = useState(false);
+  const [durationSavedMovies, setDurationSavedMovies] = useState(localStorage.durationSavedMovies
+    ? JSON.parse(localStorage.durationSavedMovies)
+    : { value: false });
 
   const editProfileButton = () => {
     setIsEditing(!isEditing);
   };
 
   const resetEditingProfile = () => {
-    editProfileButton();
-    setIsError(null);
+    setIsEditing(false);
+    setIsInfoMessage(null);
   };
 
   const openPopup = () => {
@@ -94,19 +77,20 @@ function App() {
 
   const closePopup = () => {
     resetEditingProfile();
+    setIsError(false);
     setIsTooltipPopupOpen(false);
   };
 
-  const alertErrorMessage = (err) => (err.message === 'Failed to fetch'
-    ? { message: 'На сервере произошла ошибка. Попробуйте ещё раз.' }
-    : err);
+  function searchShortMovies(movies) {
+    return movies.filter((movie) => movie.duration <= DURATION_SHORT);
+  }
 
   const getAllMovies = () => moviesApi
     .getMovies()
     .then((movies) => movies)
-    .catch((err) => {
-      console.log(err, 'err');
-      setIsError(alertErrorMessage(err));
+    .catch(() => {
+      setIsError(true);
+      setIsInfoMessage(MESSAGE_FAILED_TO_FETCH);
       openPopup();
     });
 
@@ -120,109 +104,138 @@ function App() {
 
   const searchMovies = (movies, searchValue, pageSavedMovies) => {
     startPreloader();
-
-    if (!searchValue && pageSavedMovies) {
-      // setIsSavedMovies(movies || []);
-      stopPreloader();
-      return;
-    }
-    console.log(movies, 'movies');
-    console.log(searchValue, 'movies');
     const searchList = movies.filter((movie) => {
       const movieNameRU = movie.nameRU.toLowerCase();
       const movieNameEN = movie.nameEN.toLowerCase();
       const resultRU = movieNameRU.includes(searchValue.toLowerCase());
       const resultEN = movieNameEN.includes(searchValue.toLowerCase());
-
       return resultRU || resultEN;
     });
     if (!pageSavedMovies) {
-      console.log(searchList, 'searchList');
-      localStorage.setItem('moviesFound', localStorage.durationMovies
+      localStorage.setItem('moviesFound', durationMovies.value
         ? JSON.stringify(searchShortMovies(searchList))
         : JSON.stringify(searchList));
-      // localStorage.setItem('moviesDuration', JSON.stringify(isShort));
+      setCardMoviesDisplay(durationMovies.value
+        ? searchShortMovies(searchList)
+        : searchList);
       localStorage.setItem('valueSearch', searchValue);
-      // eslint-disable-next-line max-len
-      // setSearchedMovies(localStorage.durationMovies ? searchShortMovies(searchList) : searchList);
+      localStorage.setItem('durationMovies', JSON.stringify({ value: durationMovies.value }));
       stopPreloader();
       return;
     }
-
-    // const short = JSON.parse(localStorage.moviesSavedDuration);
-    // console.log(short, 'short-Saved-movies');
-    localStorage.setItem('moviesSavedFound', JSON.stringify(searchShortMovies(searchList)));
-    // localStorage.setItem('moviesSavedDuration', JSON.stringify(isSavedMoviesShort));
+    localStorage.setItem('moviesSavedFound', durationSavedMovies.value
+      ? JSON.stringify(searchShortMovies(searchList))
+      : JSON.stringify(searchList));
+    setCardSavedMoviesDisplay(durationSavedMovies.value
+      ? searchShortMovies(searchList)
+      : searchList);
     localStorage.setItem('valueSearchSaved', searchValue);
-    // setSearchedSavedMovies(short.value ? searchShortMovies(searchList) : searchList);
+    localStorage.setItem('durationSavedMovies', JSON.stringify({ value: durationSavedMovies.value }));
     stopPreloader();
+  };
+
+  const clearAllData = () => {
+    setIsLogin(false);
+    setCurrentUser({});
+    setAllSavedMovies(null);
+    setCardMoviesDisplay([]);
+    setCardSavedMoviesDisplay([]);
+    setIsInfoMessage(null);
+    setDurationMovies({ value: false });
+    setDurationSavedMovies({ value: false });
+    setIsEditing(false);
+    localStorage.clear();
+    path('/signin');
+  };
+
+  const signOut = () => {
+    startPreloader();
+    clearAllData();
+    exitUserProfile()
+      .catch((err) => {
+        localStorage.setItem('serverFailure', true);
+        setIsError(true);
+        setIsInfoMessage(alertErrorMessage(err));
+        openPopup();
+      })
+      .finally(() => {
+        stopPreloader();
+      });
   };
 
   // получаем данные пользователя
   React.useEffect(() => {
     if (isLogin) {
-      MainApi
+      mainApi
         .getUserData()
         .then((res) => {
           setCurrentUser(res.data);
         })
         .catch((err) => {
-          console.log(err);
-          setIsError(alertErrorMessage(err));
+          setIsError(true);
+          setIsInfoMessage(alertErrorMessage(err));
+          clearAllData();
+          localStorage.setItem('serverFailure', true);
           openPopup();
         });
+    }
+    if (!isLogin && localStorage.serverFailure) {
+      signOut();
     }
   }, [isLogin]);
 
   React.useEffect(() => {
     if (isLogin) {
-      MainApi.getClientMovies()
+      mainApi.getClientMovies()
         .then((res) => {
-          console.log(res);
-          // setIsSavedMovies(res);
           localStorage.setItem('allSavedMovies', JSON.stringify(res));
+          setAllSavedMovies(res);
+          setCardSavedMoviesDisplay(
+            !localStorage.moviesSavedFound
+              ? res
+              : JSON.parse(localStorage.moviesSavedFound),
+          );
         })
         .catch((err) => {
-          console.log(err);
-          setIsError(alertErrorMessage(err));
+          setIsInfoMessage(alertErrorMessage(err));
           openPopup();
         });
     }
   }, [isLogin]);
 
-  const handleSearchMovies = (searchValue) => {
-    // в константы все загруженные фильмы
-    // const ALL_MOVIES = JSON.parse(localStorage.allMovies);
+  const handleSearchMovies = (valueSearch) => {
     if (!localStorage.allMovies) {
       getAllMovies()
         .then((movies) => {
           localStorage.setItem('allMovies', JSON.stringify(movies));
-          searchMovies(movies, searchValue);
+          searchMovies(movies, valueSearch);
         })
         .catch((err) => {
-          setIsError(err);
+          setIsError(true);
+          setIsInfoMessage(err);
           openPopup();
         });
+    } else {
+      searchMovies(JSON.parse(localStorage.allMovies), valueSearch);
     }
-    console.log(localStorage.allMovies ? JSON.parse(localStorage.allMovies) : []);
-    searchMovies(JSON.parse(localStorage.allMovies), searchValue);
   };
 
-  const handleSearchSavedMovies = (searchSavedMoviesValue, savedMoviePage) => {
-    searchMovies(isSavedMovies, searchSavedMoviesValue, savedMoviePage);
+  const handleSearchSavedMovies = (valueSearch, savedMoviePage) => {
+    searchMovies(allSavedMovies, valueSearch, savedMoviePage);
   };
 
-  const handleLogin = (email, password) => {
+  const handleLogin = (email, password, currentPath) => {
     startPreloader();
     authorize(email, password)
       .then(() => {
         setIsLogin(true);
+        localStorage.removeItem('serverFailure');
         localStorage.setItem('isLogin', true);
         path('/movies');
       })
       .catch((err) => {
-        console.log(err);
-        setIsError(alertErrorMessage(err));
+        setIsError(true);
+        setIsInfoMessage(alertErrorMessage(err, currentPath));
         openPopup();
       })
       .finally(() => {
@@ -234,10 +247,10 @@ function App() {
     register({ name, email, password })
       .then(() => {
         handleLogin(email, password);
-        console.log('register');
       })
       .catch((err) => {
-        setIsError(alertErrorMessage(err));
+        setIsError(true);
+        setIsInfoMessage(alertErrorMessage(err));
         openPopup();
       })
       .finally(() => {
@@ -247,38 +260,17 @@ function App() {
 
   const handleUpdateUser = (name, email) => {
     startPreloader();
-    setIsError(null);
-    MainApi
+    setIsInfoMessage(null);
+    mainApi
       .changeUserData(name, email)
       .then((data) => {
         setCurrentUser(data.data);
-        editProfileButton();
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsError(alertErrorMessage(err));
+        setIsInfoMessage({ message: MESSAGE_UPDATE_USER });
         openPopup();
       })
-      .finally(() => {
-        stopPreloader();
-      });
-  };
-  // выход из аккаунта
-  const signOut = () => {
-    startPreloader();
-    exitUserProfile()
-      .then(() => {
-        setIsLogin(false);
-        setCurrentUser({});
-        setIsSavedMovies([]);
-        // setSearchedMovies(null);
-        setSearchedSavedMovies(null);
-        localStorage.clear();
-        path('/signin');
-      })
       .catch((err) => {
-        console.log(err);
-        setIsError(alertErrorMessage(err));
+        setIsError(true);
+        setIsInfoMessage(alertErrorMessage(err));
         openPopup();
       })
       .finally(() => {
@@ -286,29 +278,31 @@ function App() {
       });
   };
 
-  // const hendleIsShort
-  const changeDuration = (savedMoviePage) => {
-    if (savedMoviePage) {
-      setDurationSavedMovies(!durationSavedMovies);
-      localStorage.setItem('durationSavedMovies', JSON.stringify({ value:  }));
+  const changeDuration = (savedMoviesPage) => {
+    if (savedMoviesPage) {
+      setDurationSavedMovies({ value: !durationSavedMovies.value });
+      return;
     }
-    setDurationMovies(!durationMovies);
-    if (localStorage.durationMovies) {
-      return localStorage.removeItem('durationMovies');
-    }
-    return localStorage.setItem('durationMovies', true);
+    setDurationMovies({ value: !durationMovies.value });
   };
+
+  function saveLocalStorage(card) {
+    const arr = JSON.parse(localStorage.allSavedMovies);
+    const newAllSavedMovies = [card, ...arr];
+    setAllSavedMovies(newAllSavedMovies);
+    localStorage.setItem('allSavedMovies', JSON.stringify(newAllSavedMovies));
+  }
 
   const saveMovie = (card) => {
     startPreloader();
-    MainApi
+    mainApi
       .saveClientMovie(card)
-      .then((savedMovie) => {
-        setIsSavedMovies([savedMovie, ...isSavedMovies]);
+      .then((res) => {
+        saveLocalStorage(res);
       })
       .catch((err) => {
-        console.log(err);
-        setIsError(alertErrorMessage(err));
+        setIsError(true);
+        setIsInfoMessage(alertErrorMessage(err));
         openPopup();
       })
       .finally(() => {
@@ -316,21 +310,27 @@ function App() {
       });
   };
 
+  function deleteLocalCard(card) {
+    const resultAllSavedMovies = allSavedMovies
+      .filter((item) => item.movieId !== card.id && item.movieId !== card.movieId);
+    setAllSavedMovies(resultAllSavedMovies);
+    localStorage.setItem('allSavedMovies', JSON.stringify(resultAllSavedMovies));
+    const resultCardSavedMoviesDisplay = cardSavedMoviesDisplay.filter(
+      (item) => ((item._id !== card._id) || (item.id !== card.id)),
+    );
+    setCardSavedMoviesDisplay(resultCardSavedMoviesDisplay);
+    localStorage.setItem('moviesSavedFound', JSON.stringify(resultCardSavedMoviesDisplay));
+  }
+
   const deleteMovie = (card) => {
     startPreloader();
-    MainApi.deleteClientMovie(card._id)
+    mainApi.deleteClientMovie(card._id)
       .then(() => {
-        const newSavedMovies = isSavedMovies.filter((item) => (item._id !== card._id));
-        setIsSavedMovies(newSavedMovies);
-        const newSearchedSavedMovies = searchedSavedMovies.filter(
-          (item) => (item._id !== card._id),
-        );
-        setSearchedSavedMovies(newSearchedSavedMovies);
-        localStorage.setItem('moviesSavedSearch', JSON.stringify(newSearchedSavedMovies));
+        deleteLocalCard(card);
       })
       .catch((err) => {
-        console.log(err);
-        setIsError(alertErrorMessage(err));
+        setIsError(true);
+        setIsInfoMessage(alertErrorMessage(err));
         openPopup();
       })
       .finally(() => {
@@ -362,7 +362,7 @@ function App() {
               element={(
                 <Login
                   handleLogin={handleLogin}
-                  isError={isError}
+                  isInfoMessage={isInfoMessage}
                 />
               )}
             />
@@ -372,13 +372,18 @@ function App() {
               element={(
                 <Register
                   handleRegister={handleRegister}
-                  isError={isError}
+                  isInfoMessage={isInfoMessage}
                 />
               )}
             />
           </Route>
 
-          <Route element={<ProtectedRoute isLogin={isLogin} />}>
+          <Route element={(
+            <ProtectedRoute
+              isLogin={isLogin}
+            />
+)}
+          >
             <Route
               path="/profile"
               element={(
@@ -386,7 +391,7 @@ function App() {
                   isLogin={isLogin}
                   signOut={signOut}
                   handleUpdateUser={handleUpdateUser}
-                  isError={isError}
+                  isInfoMessage={isInfoMessage}
                   isEditing={isEditing}
                   editProfileButton={editProfileButton}
                   resetEditing={resetEditingProfile}
@@ -400,14 +405,11 @@ function App() {
                 <SavedMoviePage
                   isLogin={isLogin}
                   searchedMovies={cardSavedMoviesDisplay}
-                  // eslint-disable-next-line max-len
-                  // searchedMovies={localStorage.getItem('moviesSavedSearch') ? JSON.parse(localStorage.moviesSavedSearch) : JSON.parse(localStorage.allSavedMovies)}
-                  // ? JSON.parse(localStorage.moviesSavedSearch) :
-                  //  []}
                   deleteMovie={deleteMovie}
                   changeDuration={changeDuration}
                   searchMovies={handleSearchSavedMovies}
-                  isShort={durationSavedMovies}
+                  isShort={durationSavedMovies || false}
+                  allSavedMovies={allSavedMovies}
                 />
             )}
             />
@@ -418,15 +420,12 @@ function App() {
                 <MoviePage
                   isLogin={isLogin}
                   searchedMovies={cardMoviesDisplay}
-                  // searchedMovies={localStorage.getItem('moviesFound')
-                  //   ? JSON.parse(localStorage.moviesFound)
-                  //   : []}
                   searchMovies={handleSearchMovies}
                   changeDuration={changeDuration}
-                  isShort={durationMovies}
+                  isShort={durationMovies || false}
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
-                  isSavedMovies={isSavedMovies}
+                  allSavedMovies={allSavedMovies}
                 />
             )}
             />
@@ -439,13 +438,13 @@ function App() {
         </Routes>
         <InfoTooltip
           isOpen={isInfoTooltipPopupOpen}
-          result={isError}
+          result={isInfoMessage}
           onClose={closePopup}
+          isError={isError}
         />
         <Preloader isPreloader={isPreloader} />
       </div>
     </CurrentUserContext.Provider>
   );
 }
-
 export default App;

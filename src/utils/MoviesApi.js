@@ -1,5 +1,4 @@
-/* eslint-disable no-underscore-dangle */
-import MOVIES_URL from './consts';
+import { URL_MOVIES } from './consts';
 
 class MoviesApi {
   constructor({ moviesUrl, headers }) {
@@ -21,7 +20,7 @@ class MoviesApi {
 }
 
 const moviesApi = new MoviesApi({
-  moviesUrl: MOVIES_URL,
+  moviesUrl: URL_MOVIES,
   headers: {
     'Content-Type': 'application/json',
   },

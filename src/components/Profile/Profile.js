@@ -3,12 +3,13 @@ import React, { useContext } from 'react';
 import Header from '../Header/Header';
 import useForm from '../../utils/useForm';
 import CurrentUserContext from '../../context/CurrentUserContext';
+import { MESSAGE_VALIDATION_EMAIL, MESSAGE_VALIDATION_NAME } from '../../utils/consts';
 
 function Profile({
   signOut,
   isLogin,
   handleUpdateUser,
-  isError,
+  isInfoMessage,
   isEditing,
   editProfileButton,
 }) {
@@ -46,7 +47,7 @@ function Profile({
         <section className="profile-page">
           <h1 className="profile-page__title">{`Привет, ${currentUser.name}`}</h1>
           <form className="form-profile" onSubmit={handleSubmit}>
-            <span className="form-profile__error form-profile__error_type_name">{errors.name ? 'Буквы, цифры и дефис. От 2 до 30 символов.' : ''}</span>
+            <span className="form-profile__error form-profile__error_type_name">{errors.name ? MESSAGE_VALIDATION_NAME : ''}</span>
             <label htmlFor="name" className="form-profile__user-data">
               <p className="form-profile__input-name">Имя</p>
               <input
@@ -78,10 +79,10 @@ function Profile({
                 disabled={!isEditing && true}
               />
             </label>
-            <span className="form-profile__error form-profile__error_type_email">{errors.Email ? 'Введите адрес электронной почты' : ''}</span>
+            <span className="form-profile__error form-profile__error_type_email">{errors.Email ? MESSAGE_VALIDATION_EMAIL : ''}</span>
             {isEditing && (
             <>
-              <span className="form-profile__error-serv">{isError !== null ? isError.message : ''}</span>
+              <span className="form-profile__error-serv">{isInfoMessage ? isInfoMessage.message : ''}</span>
               <button
                 type="submit"
                 className="form-profile__submit"

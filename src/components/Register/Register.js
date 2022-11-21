@@ -2,8 +2,13 @@ import './Register.css';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import useForm from '../../utils/useForm';
+import {
+  MESSAGE_VALIDATION_EMAIL,
+  MESSAGE_VALIDATION_NAME,
+  MESSAGE_VALIDATION_PASSWORD,
+} from '../../utils/consts';
 
-function Register({ handleRegister, isError }) {
+function Register({ handleRegister, isInfoMessage }) {
   const {
     values, errors, handleChange, isValid,
   } = useForm();
@@ -33,7 +38,7 @@ function Register({ handleRegister, isError }) {
             />
             <span className="form-register__error">
               {errors.nameRegister
-                ? 'Буквы, цифры и дефис. От 2 до 30 символов.'
+                ? MESSAGE_VALIDATION_NAME
                 : ''}
             </span>
           </label>
@@ -49,7 +54,7 @@ function Register({ handleRegister, isError }) {
               value={values.EmailRegister || ''}
               required
             />
-            <span className="form-register__error">{errors.EmailRegister ? 'Ведите адрес электронной почты' : ''}</span>
+            <span className="form-register__error">{errors.EmailRegister ? MESSAGE_VALIDATION_EMAIL : ''}</span>
           </label>
           <label className="form-register__label" htmlFor="password">
             Пароль
@@ -64,9 +69,9 @@ function Register({ handleRegister, isError }) {
               value={values.password || ''}
               required
             />
-            <span className="form-register__error">{errors.password ? 'Пароль от 2 до 20 символов' : ''}</span>
+            <span className="form-register__error">{errors.password ? MESSAGE_VALIDATION_PASSWORD : ''}</span>
           </label>
-          <span className="form-register__error-serv">{isError ? isError.message : ''}</span>
+          <span className="form-register__error-serv">{isInfoMessage ? isInfoMessage.message : ''}</span>
           <button type="submit" className="form-register__submit" disabled={!isValid}>Зарегистрироваться</button>
         </form>
         <p className="register-page__text">

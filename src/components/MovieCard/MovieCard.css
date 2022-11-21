@@ -23,6 +23,11 @@
   border-radius: 10px 10px 0 0;
 }
 
+.movie-card__trailer-link:focus-visible {
+  outline-color:  #2BE080;
+  outline-offset: 2px;
+}
+
 .movie-card__info {
   height: 67px;
   display: flex;

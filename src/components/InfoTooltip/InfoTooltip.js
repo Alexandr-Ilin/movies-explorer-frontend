@@ -4,7 +4,9 @@ import React from 'react';
 import okPath from '../../images/ok.svg';
 import errorPath from '../../images/error.svg';
 
-function InfoTooltip({ isOpen, result, onClose }) {
+function InfoTooltip({
+  isOpen, result, onClose, isError,
+}) {
   React.useEffect(() => {
     if (!isOpen) return;
     const closeByEscape = (e) => {
@@ -30,7 +32,7 @@ function InfoTooltip({ isOpen, result, onClose }) {
       aria-hidden="true"
     >
       <div className="popup__info-container">
-        <img className="popup__info-image" src={!result ? okPath : errorPath} alt={result ? 'Успешно' : 'Что-то не так'} />
+        <img className="popup__info-image" src={isError ? errorPath : okPath} alt={result ? 'Успешно' : 'Что-то не так'} />
         <h2 className="popup__info-header">{result ? result.message : ''}</h2>
         {/* <h2 className="popup__info-header">;lklk;lk;lk</h2> */}
         <button

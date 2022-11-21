@@ -6,9 +6,8 @@ import useScreenWidth from '../../utils/useWidthScreen';
 import useStartSet from '../../utils/useStartSet';
 
 function MovieCardList({
-  searchedMovies, saveMovie, deleteMovie,
+  searchedMovies, saveMovie, deleteMovie, allSavedMovies,
 }) {
-  console.log(searchedMovies, 'cardList-searchedMovies');
   const currentPath = useLocation().pathname;
   const widthScreen = useScreenWidth();
   const startSet = useStartSet(widthScreen);
@@ -19,7 +18,6 @@ function MovieCardList({
     if (currentPath === '/movies') {
       const start = 0;
       const end = startSet.start;
-
       setStartMovies(searchedMovies.slice(start, end));
       setCount(end);
     }
@@ -57,12 +55,12 @@ function MovieCardList({
                 card={movieCard}
                 saveMovie={saveMovie}
                 deleteMovie={deleteMovie}
-                // isSaved={isSavedMovies}
+                allSavedMovies={allSavedMovies}
               />
             )))
             : searchedMovies.map((movieCard) => (
               <MovieCard
-                key={movieCard._id}
+                key={movieCard._id || movieCard.id}
                 deleteMovie={deleteMovie}
                 card={movieCard}
               />

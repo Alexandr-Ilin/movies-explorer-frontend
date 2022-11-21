@@ -4,7 +4,8 @@ import Footer from '../Footer/Footer';
 import MovieCardList from '../MovieCardList/MovieCardList';
 
 function SavedMoviePage({
-  isLogin, deleteMovie, searchMovies, changeDuration, isShort, searchedMovies,
+  isLogin, searchedMovies, deleteMovie, searchMovies, changeDuration, isShort, allSavedMovies,
+
 }) {
   return (
     <>
@@ -18,7 +19,7 @@ function SavedMoviePage({
           isShort={isShort}
         />
         <MovieCardList
-          // isSavedMovies={isSavedMovies}
+          isSavedMovies={allSavedMovies}
           searchedMovies={searchedMovies}
           deleteMovie={deleteMovie}
         />

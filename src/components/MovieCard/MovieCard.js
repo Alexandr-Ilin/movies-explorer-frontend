@@ -1,26 +1,22 @@
 import './MovieCard.css';
 import { useLocation } from 'react-router-dom';
+import React from 'react';
 import MovieButton from '../MovieButton/MovieButton';
+import { URL_BASE_MOVIES } from '../../utils/consts';
 
 function MovieCard({
-  card, saveMovie, deleteMovie,
+  card, saveMovie, deleteMovie, allSavedMovies,
 }) {
   const currentPath = useLocation().pathname;
+  const [isLiked, setIsLiked] = React.useState();
 
-  console.log(card, 'cardergg');
-
-  const getSavedCard = () => {
-    // в константы!!!!!!!!!!!!
-    const ALL_SAVED_MOVIES = JSON.parse(localStorage.allSavedMovies);
-    console.log(ALL_SAVED_MOVIES);
+  React.useEffect(() => {
     if (currentPath === '/movies') {
-      return ALL_SAVED_MOVIES.find((item) => item.movieId === card.id);
+      const like = JSON.parse(localStorage.allSavedMovies)
+        .find((item) => item.movieId === card.id || item.id === card.id);
+      setIsLiked(like);
     }
-    return card;
-  };
-
-  const savedCard = getSavedCard();
-  console.log(savedCard);
+  }, [allSavedMovies]);
 
   function calculateDuration(duration) {
     const hours = Math.floor(duration / 60);
@@ -33,6 +29,13 @@ function MovieCard({
       : `0ч${minutes}м`;
   }
 
+  function getCardUrl() {
+    if (card.id) {
+      return `${URL_BASE_MOVIES}/${card.image.url}`;
+    }
+    return card.image;
+  }
+
   function handleClick() {
     deleteMovie(card);
   }
@@ -43,7 +46,7 @@ function MovieCard({
         <a className="movie-card__trailer-link" href={card.trailerLink} target="blank">
           <img
             className="movie-card__image"
-            src={currentPath === '/movies' ? `https://api.nomoreparties.co/${card.image.url}` : card.image}
+            src={currentPath === '/movies' ? `${URL_BASE_MOVIES}/${card.image.url}` : getCardUrl()}
             alt={card.nameRU}
           />
         </a>
@@ -64,10 +67,10 @@ function MovieCard({
             )
             : (
               <MovieButton
-                card={savedCard ? { ...card, _id: savedCard._id } : card}
+                card={isLiked ? { ...card, _id: isLiked._id } : card}
                 saveMovie={saveMovie}
                 deleteMovie={deleteMovie}
-                isLiked={!!savedCard}
+                isLiked={!!isLiked}
               />
             )}
         </figcaption>

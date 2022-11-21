@@ -7,13 +7,13 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
   const {
     values, handleChange, errors, isValid, setValues, setIsValid,
   } = useForm();
-  // console.log(errors.searchSavedMovies);
+
   const currentPath = useLocation().pathname;
   const savedMoviePage = currentPath !== '/movies';
 
   React.useEffect(() => {
     if (!savedMoviePage) {
-      const localSearch = localStorage.getItem('searchValue');
+      const localSearch = localStorage.getItem('valueSearch');
       if (localSearch) {
         setValues({ search: localSearch });
         setIsValid(!isValid);
@@ -21,7 +21,8 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
       }
       setIsValid(isValid);
     }
-    const localSearch = localStorage.getItem('searchSavedValue');
+
+    const localSearch = localStorage.getItem('valueSearchSaved');
     if (localSearch) {
       setValues({ searchSavedMovies: localSearch });
       setIsValid(!isValid);
@@ -29,19 +30,16 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
     }
     setIsValid(isValid);
   }, []);
-  console.log(localStorage.durationMovies);
 
   function handleSubmit(evt) {
     evt.preventDefault();
     searchMovies(currentPath === '/movies' ? values.search : values.searchSavedMovies, savedMoviePage);
   }
 
-  console.log(isShort);
-
-  function handleClick() {
-    console.log(isShort);
-    changeDuration(savedMoviePage);
-    // handleSubmit(evt);
+  function handleClick(evt) {
+    changeDuration(savedMoviePage, () => {
+      handleSubmit(evt);
+    });
   }
 
   return (
@@ -70,9 +68,9 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
         </div>
         <div className="search-form__radio-wrapper">
           <button
-            type="button"
-            aria-label={isShort ? 'Выбрать короткометражки' : 'Выбрать любые фильмы'}
-            className={`search-form__radio ${isShort ? 'search-form__radio_marked' : 'search-form__radio_not-marked'}`}
+            type="submit"
+            aria-label={isShort.value ? 'Выбрать короткометражки' : 'Выбрать любые фильмы'}
+            className={`search-form__radio ${isShort.value ? 'search-form__radio_marked' : 'search-form__radio_not-marked'}`}
             onClick={handleClick}
             disabled={!isValid}
           />

@@ -1,19 +1,14 @@
-// import BASE_URL from './consts';
-const BASE_URL = 'http://localhost:3000';
+import { URL_BASE } from './consts';
 
 const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return res.json()
-    .then((err) => {
-      console.log(err, 'ошибка авторизации');
-      throw err;
-    });
+  return Promise.reject(new Error(res.status));
 };
 
 export const register = ({ name, email, password }) => (
-  fetch(`${BASE_URL}/signup`, {
+  fetch(`${URL_BASE}/signup`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -26,7 +21,7 @@ export const register = ({ name, email, password }) => (
 );
 
 export const authorize = (email, password) => (
-  fetch(`${BASE_URL}/signin`, {
+  fetch(`${URL_BASE}/signin`, {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -39,7 +34,7 @@ export const authorize = (email, password) => (
 );
 
 export const exitUserProfile = () => (
-  fetch(`${BASE_URL}/signout`, {
+  fetch(`${URL_BASE}/signout`, {
     method: 'GET',
     credentials: 'include',
     headers: {

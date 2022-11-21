@@ -11,7 +11,7 @@ function MoviePage({
   isShort,
   saveMovie,
   deleteMovie,
-  isSavedMovies,
+  allSavedMovies,
 }) {
   return (
     <>
@@ -28,7 +28,7 @@ function MoviePage({
           searchedMovies={searchedMovies}
           saveMovie={saveMovie}
           deleteMovie={deleteMovie}
-          isSavedMovies={isSavedMovies}
+          allSavedMovies={allSavedMovies}
         />
       </main>
       <Footer />

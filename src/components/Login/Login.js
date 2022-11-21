@@ -1,16 +1,22 @@
 import './Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import useForm from '../../utils/useForm';
+import {
+  MESSAGE_VALIDATION_EMAIL,
+  MESSAGE_VALIDATION_PASSWORD,
+} from '../../utils/consts';
 
-function Login({ handleLogin, isError }) {
+function Login({ handleLogin, isInfoMessage }) {
   const {
     values, errors, handleChange, isValid,
   } = useForm();
 
+  const currentPath = useLocation().pathname;
+
   function onSubmit(e) {
     e.preventDefault();
-    handleLogin(values.EmailLogin, values.password);
+    handleLogin(values.EmailLogin, values.password, currentPath);
   }
 
   return (
@@ -32,7 +38,7 @@ function Login({ handleLogin, isError }) {
               value={values.EmailLogin || ''}
               required
             />
-            <span className="form-login__error">{errors.EmailLogin ? 'Введите адрес электронной почты' : ''}</span>
+            <span className="form-login__error">{errors.EmailLogin ? MESSAGE_VALIDATION_EMAIL : ''}</span>
           </label>
           <label className="form-login__label" htmlFor="password">
             Пароль
@@ -48,9 +54,9 @@ function Login({ handleLogin, isError }) {
               value={values.password || ''}
               required
             />
-            <span className="form-login__error">{errors.password ? 'Пароль от 2 до 20 символов' : ''}</span>
+            <span className="form-login__error">{errors.password ? MESSAGE_VALIDATION_PASSWORD : ''}</span>
           </label>
-          <span className="form-login__error-serv">{isError ? isError.message : ''}</span>
+          <span className="form-login__error-serv">{isInfoMessage ? isInfoMessage.message : ''}</span>
           <button type="submit" className="form-login__submit" disabled={!isValid}>Войти</button>
         </form>
         <p className="login-page__text">

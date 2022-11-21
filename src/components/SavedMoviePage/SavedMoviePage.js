@@ -5,7 +5,6 @@ import MovieCardList from '../MovieCardList/MovieCardList';
 
 function SavedMoviePage({
   isLogin, searchedMovies, deleteMovie, searchMovies, changeDuration, isShort, allSavedMovies,
-
 }) {
   return (
     <>

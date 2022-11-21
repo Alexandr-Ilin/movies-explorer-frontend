@@ -37,6 +37,7 @@ function App() {
   // карточки которые выводятся
   const [cardMoviesDisplay, setCardMoviesDisplay] = useState(localStorage.moviesFound
     ? JSON.parse(localStorage.moviesFound)
+    // : JSON.parse(localStorage.allSavedMovies));
     : []);
   // вывод сохраненных карточек
   const [cardSavedMoviesDisplay, setCardSavedMoviesDisplay] = useState(
@@ -203,6 +204,12 @@ function App() {
     }
   }, [isLogin]);
 
+  React.useEffect(() => {
+    if (!localStorage.moviesSavedFound && localStorage.allSavedMovies) {
+      setCardSavedMoviesDisplay(JSON.parse(localStorage.allSavedMovies));
+    }
+  }, [allSavedMovies]);
+
   const handleSearchMovies = (valueSearch) => {
     if (!localStorage.allMovies) {
       getAllMovies()
@@ -318,8 +325,10 @@ function App() {
     const resultCardSavedMoviesDisplay = cardSavedMoviesDisplay.filter(
       (item) => ((item._id !== card._id) || (item.id !== card.id)),
     );
-    setCardSavedMoviesDisplay(resultCardSavedMoviesDisplay);
-    localStorage.setItem('moviesSavedFound', JSON.stringify(resultCardSavedMoviesDisplay));
+    if (localStorage.moviesSavedFound) {
+      setCardSavedMoviesDisplay(resultCardSavedMoviesDisplay);
+      localStorage.setItem('moviesSavedFound', JSON.stringify(resultCardSavedMoviesDisplay));
+    }
   }
 
   const deleteMovie = (card) => {

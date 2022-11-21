@@ -75,6 +75,6 @@
 @media screen and (max-width: 639px) {
 
   .card-list {
-    grid-template-columns: minmax(300px, 1fr);
+    grid-template-columns: minmax(100%, 1fr);
   }
 }

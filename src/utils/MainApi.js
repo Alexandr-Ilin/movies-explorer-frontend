@@ -21,7 +21,7 @@ class MainApi {
   };
 
   getUserData() {
-    return fetch('https://api.diplom.ilin.nomoredomains.sbs/users/me', {
+    return fetch(this._userUrl, {
       headers: this._headers,
       credentials: 'include',
     })

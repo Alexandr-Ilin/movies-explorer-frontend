@@ -22,17 +22,18 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
       setIsValid(isValid);
     }
 
-    const localSearch = localStorage.getItem('valueSearchSaved');
-    if (localSearch) {
-      setValues({ searchSavedMovies: localSearch });
-      setIsValid(!isValid);
-      return;
-    }
-    setIsValid(isValid);
+    // const localSearch = localStorage.getItem('valueSearchSaved');
+    // if (localSearch) {
+    //   setValues({ searchSavedMovies: localSearch });
+    //   setIsValid(!isValid);
+    //   return;
+    // }
+    // setIsValid(isValid);
   }, []);
 
   function handleSubmit(evt) {
     evt.preventDefault();
+
     searchMovies(currentPath === '/movies' ? values.search : values.searchSavedMovies, savedMoviePage);
   }
 
@@ -55,13 +56,12 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
             onChange={handleChange}
             required
           />
-          {/* <span className="search-form__error">uiuiiuiui</span> */}
           <span className="search-form__error">{!savedMoviePage ? errors.search : errors.searchSavedMovies}</span>
           <button
             type="submit"
             className="search-form__submit"
             aria-label="Найти фильм"
-            disabled={!isValid}
+            // disabled={!isValid}
           >
             Найти
           </button>
@@ -72,7 +72,7 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
             aria-label={isShort.value ? 'Выбрать короткометражки' : 'Выбрать любые фильмы'}
             className={`search-form__radio ${isShort.value ? 'search-form__radio_marked' : 'search-form__radio_not-marked'}`}
             onClick={handleClick}
-            disabled={!isValid}
+            // disabled={!isValid}
           />
           <p className="search-form__button-subtitle">Короткометражки</p>
         </div>

@@ -1,7 +1,7 @@
 export const URL_MOVIES = 'https://api.nomoreparties.co/beatfilm-movies';
 export const URL_BASE_MOVIES = 'https://api.nomoreparties.co';
-export const URL_BASE = 'http://localhost:3000';
 // export const URL_BASE = 'https://api.diplom.ilin.nomoredomains.sbs';
+export const URL_BASE = 'http://localhost:3000';
 
 export const ERROR_BAD_REQUEST = '400';
 export const ERROR_FAILED_TO_FETCH = 'Failed to fetch';

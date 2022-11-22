@@ -37,14 +37,12 @@ function App() {
   // карточки которые выводятся
   const [cardMoviesDisplay, setCardMoviesDisplay] = useState(localStorage.moviesFound
     ? JSON.parse(localStorage.moviesFound)
-    // : JSON.parse(localStorage.allSavedMovies));
     : []);
-  // вывод сохраненных карточек
+  // вывод сохраненных карточек --- надо переделать
   const [cardSavedMoviesDisplay, setCardSavedMoviesDisplay] = useState(
-    localStorage.moviesSavedFound
-      ? JSON.parse(localStorage.moviesSavedFound)
-      : [],
+    JSON.parse(localStorage.allSavedMovies),
   );
+  // состояние авторизации
   const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin'));
   // сообщения ошибок
   const [isInfoMessage, setIsInfoMessage] = useState(null);
@@ -58,13 +56,19 @@ function App() {
   const [durationMovies, setDurationMovies] = useState(localStorage.durationMovies
     ? JSON.parse(localStorage.durationMovies)
     : { value: false });
-  // длительность сохраненных фильмов
-  const [durationSavedMovies, setDurationSavedMovies] = useState(localStorage.durationSavedMovies
-    ? JSON.parse(localStorage.durationSavedMovies)
-    : { value: false });
+  // длительность сохраненных фильмов --- возможно не нужно
+  const [durationSavedMovies, setDurationSavedMovies] = useState({ value: false });
 
   const editProfileButton = () => {
     setIsEditing(!isEditing);
+  };
+
+  const setMovie = () => {
+    setCardSavedMoviesDisplay(JSON.parse(localStorage.allSavedMovies));
+  };
+
+  const setDuration = () => {
+    setDurationSavedMovies({});
   };
 
   const resetEditingProfile = () => {
@@ -124,14 +128,9 @@ function App() {
       stopPreloader();
       return;
     }
-    localStorage.setItem('moviesSavedFound', durationSavedMovies.value
-      ? JSON.stringify(searchShortMovies(searchList))
-      : JSON.stringify(searchList));
     setCardSavedMoviesDisplay(durationSavedMovies.value
       ? searchShortMovies(searchList)
       : searchList);
-    localStorage.setItem('valueSearchSaved', searchValue);
-    localStorage.setItem('durationSavedMovies', JSON.stringify({ value: durationSavedMovies.value }));
     stopPreloader();
   };
 
@@ -204,11 +203,11 @@ function App() {
     }
   }, [isLogin]);
 
-  React.useEffect(() => {
-    if (!localStorage.moviesSavedFound && localStorage.allSavedMovies) {
-      setCardSavedMoviesDisplay(JSON.parse(localStorage.allSavedMovies));
-    }
-  }, [allSavedMovies]);
+  // React.useEffect(() => {
+  //   if (localStorage.allSavedMovies) {
+  //     setCardSavedMoviesDisplay(JSON.parse(localStorage.allSavedMovies));
+  //   }
+  // }, [allSavedMovies]);
 
   const handleSearchMovies = (valueSearch) => {
     if (!localStorage.allMovies) {
@@ -419,6 +418,8 @@ function App() {
                   searchMovies={handleSearchSavedMovies}
                   isShort={durationSavedMovies || false}
                   allSavedMovies={allSavedMovies}
+                  setMovie={setMovie}
+                  setDuration={setDuration}
                 />
             )}
             />

@@ -1,11 +1,28 @@
+import React from 'react';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 import MovieCardList from '../MovieCardList/MovieCardList';
 
 function SavedMoviePage({
-  isLogin, searchedMovies, deleteMovie, searchMovies, changeDuration, isShort, allSavedMovies,
+  isLogin,
+  searchedMovies,
+  deleteMovie,
+  searchMovies,
+  changeDuration,
+  isShort,
+  allSavedMovies,
+  setMovie,
+  setDuration,
 }) {
+  React.useEffect(() => {
+    setMovie();
+  }, [allSavedMovies]);
+
+  React.useEffect(() => {
+    setDuration();
+  }, []);
+
   return (
     <>
       <Header

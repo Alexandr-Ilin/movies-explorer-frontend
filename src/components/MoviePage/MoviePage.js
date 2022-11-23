@@ -12,6 +12,7 @@ function MoviePage({
   saveMovie,
   deleteMovie,
   allSavedMovies,
+  renderInfoMessage,
 }) {
   return (
     <>
@@ -23,6 +24,7 @@ function MoviePage({
           searchMovies={searchMovies}
           changeDuration={changeDuration}
           isShort={isShort}
+          renderInfoMessage={renderInfoMessage}
         />
         <MovieCardList
           searchedMovies={searchedMovies}

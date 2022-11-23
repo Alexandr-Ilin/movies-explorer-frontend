@@ -14,14 +14,22 @@ function SavedMoviePage({
   allSavedMovies,
   setMovie,
   setDuration,
+  renderInfoMessage,
 }) {
   React.useEffect(() => {
     setMovie();
-  }, [allSavedMovies]);
+    console.log('работает эфект');
+  }, []);
 
   React.useEffect(() => {
     setDuration();
+    console.log('работает эфект длительности');
   }, []);
+
+  // React.useEffect(() => {
+  //   // console.log(moviesSavedSearch, 'saved --- Smovies');
+  //   setDuration();
+  // }, [moviesSavedSearch]);
 
   return (
     <>
@@ -33,6 +41,7 @@ function SavedMoviePage({
           searchMovies={searchMovies}
           changeDuration={changeDuration}
           isShort={isShort}
+          renderInfoMessage={renderInfoMessage}
         />
         <MovieCardList
           isSavedMovies={allSavedMovies}

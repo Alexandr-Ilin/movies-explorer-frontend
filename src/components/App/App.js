@@ -39,9 +39,7 @@ function App() {
     ? JSON.parse(localStorage.moviesFound)
     : []);
   // вывод сохраненных карточек --- надо переделать
-  const [cardSavedMoviesDisplay, setCardSavedMoviesDisplay] = useState(
-    JSON.parse(localStorage.allSavedMovies),
-  );
+  const [cardSavedMoviesDisplay, setCardSavedMoviesDisplay] = useState([]);
   // состояние авторизации
   const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin'));
   // сообщения ошибок
@@ -56,7 +54,7 @@ function App() {
   const [durationMovies, setDurationMovies] = useState(localStorage.durationMovies
     ? JSON.parse(localStorage.durationMovies)
     : { value: false });
-  // длительность сохраненных фильмов --- возможно не нужно
+  // длительность сохраненных фильмов
   const [durationSavedMovies, setDurationSavedMovies] = useState({ value: false });
 
   const editProfileButton = () => {
@@ -86,6 +84,12 @@ function App() {
     setIsTooltipPopupOpen(false);
   };
 
+  const renderInfoMessage = (message, error) => {
+    setIsError(error && error);
+    setIsInfoMessage(message);
+    openPopup();
+  };
+
   function searchShortMovies(movies) {
     return movies.filter((movie) => movie.duration <= DURATION_SHORT);
   }
@@ -95,8 +99,7 @@ function App() {
     .then((movies) => movies)
     .catch(() => {
       setIsError(true);
-      setIsInfoMessage(MESSAGE_FAILED_TO_FETCH);
-      openPopup();
+      renderInfoMessage(MESSAGE_FAILED_TO_FETCH);
     });
 
   const startPreloader = () => {
@@ -109,6 +112,14 @@ function App() {
 
   const searchMovies = (movies, searchValue, pageSavedMovies) => {
     startPreloader();
+    if (pageSavedMovies && !searchValue) {
+      console.log('приходит в поиск');
+      setCardSavedMoviesDisplay(durationSavedMovies.value
+        ? searchShortMovies(allSavedMovies)
+        : allSavedMovies);
+      stopPreloader();
+      return;
+    }
     const searchList = movies.filter((movie) => {
       const movieNameRU = movie.nameRU.toLowerCase();
       const movieNameEN = movie.nameEN.toLowerCase();
@@ -145,7 +156,7 @@ function App() {
     setDurationSavedMovies({ value: false });
     setIsEditing(false);
     localStorage.clear();
-    path('/signin');
+    path('/');
   };
 
   const signOut = () => {
@@ -190,11 +201,9 @@ function App() {
         .then((res) => {
           localStorage.setItem('allSavedMovies', JSON.stringify(res));
           setAllSavedMovies(res);
-          setCardSavedMoviesDisplay(
-            !localStorage.moviesSavedFound
-              ? res
-              : JSON.parse(localStorage.moviesSavedFound),
-          );
+          console.log('обращение и установка');
+          // переделать
+          setCardSavedMoviesDisplay(res);
         })
         .catch((err) => {
           setIsInfoMessage(alertErrorMessage(err));
@@ -202,12 +211,6 @@ function App() {
         });
     }
   }, [isLogin]);
-
-  // React.useEffect(() => {
-  //   if (localStorage.allSavedMovies) {
-  //     setCardSavedMoviesDisplay(JSON.parse(localStorage.allSavedMovies));
-  //   }
-  // }, [allSavedMovies]);
 
   const handleSearchMovies = (valueSearch) => {
     if (!localStorage.allMovies) {
@@ -271,6 +274,7 @@ function App() {
       .changeUserData(name, email)
       .then((data) => {
         setCurrentUser(data.data);
+        // --- провепить ---
         setIsInfoMessage({ message: MESSAGE_UPDATE_USER });
         openPopup();
       })
@@ -320,14 +324,12 @@ function App() {
     const resultAllSavedMovies = allSavedMovies
       .filter((item) => item.movieId !== card.id && item.movieId !== card.movieId);
     setAllSavedMovies(resultAllSavedMovies);
+
     localStorage.setItem('allSavedMovies', JSON.stringify(resultAllSavedMovies));
     const resultCardSavedMoviesDisplay = cardSavedMoviesDisplay.filter(
       (item) => ((item._id !== card._id) || (item.id !== card.id)),
     );
-    if (localStorage.moviesSavedFound) {
-      setCardSavedMoviesDisplay(resultCardSavedMoviesDisplay);
-      localStorage.setItem('moviesSavedFound', JSON.stringify(resultCardSavedMoviesDisplay));
-    }
+    setCardSavedMoviesDisplay(resultCardSavedMoviesDisplay);
   }
 
   const deleteMovie = (card) => {
@@ -420,6 +422,7 @@ function App() {
                   allSavedMovies={allSavedMovies}
                   setMovie={setMovie}
                   setDuration={setDuration}
+                  renderInfoMessage={renderInfoMessage}
                 />
             )}
             />
@@ -436,6 +439,7 @@ function App() {
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
                   allSavedMovies={allSavedMovies}
+                  renderInfoMessage={renderInfoMessage}
                 />
             )}
             />

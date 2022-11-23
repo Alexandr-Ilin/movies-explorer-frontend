@@ -42,37 +42,21 @@ function SearchForm({
   function handleSubmit(evt) {
     evt.preventDefault();
     if (!values.search && !values.searchSavedMovies && !shortSearch) {
-      console.log('здесь');
       const error = true;
       renderInfoMessage({ message: 'Введите ключевое слово' }, error);
       return;
     }
-    console.log('работает');
     setShortSearch(!shortSearch);
     searchMovies(currentPath === '/movies' ? values.search : values.searchSavedMovies, savedMoviePage);
   }
 
   function handleClick() {
     if (!savedMoviePage && !values.search) {
-      // console.log('pltcm');
-      // const error = true;
-      // renderInfoMessage({ message: 'Введите ключевое слово' }, error);
       return;
     }
-
-    // changeDuration(savedMoviePage, () => {
-    //   evt.preventDefault();
-    //   console.log('pltcmlllll');
-    //   searchMovies(savedMoviePage);
-    // });
-    console.log('здеся');
-    console.log(values.search);
     setShortSearch(true);
     changeDuration(savedMoviePage);
   }
-  // changeDuration(savedMoviePage, () => {
-  //   handleSubmit(evt);
-  // });
 
   return (
     <div className="search-form">

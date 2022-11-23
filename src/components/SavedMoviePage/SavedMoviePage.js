@@ -18,18 +18,11 @@ function SavedMoviePage({
 }) {
   React.useEffect(() => {
     setMovie();
-    console.log('работает эфект');
   }, []);
 
   React.useEffect(() => {
     setDuration();
-    console.log('работает эфект длительности');
   }, []);
-
-  // React.useEffect(() => {
-  //   // console.log(moviesSavedSearch, 'saved --- Smovies');
-  //   setDuration();
-  // }, [moviesSavedSearch]);
 
   return (
     <>

@@ -113,7 +113,6 @@ function App() {
   const searchMovies = (movies, searchValue, pageSavedMovies) => {
     startPreloader();
     if (pageSavedMovies && !searchValue) {
-      console.log('приходит в поиск');
       setCardSavedMoviesDisplay(durationSavedMovies.value
         ? searchShortMovies(allSavedMovies)
         : allSavedMovies);
@@ -201,8 +200,6 @@ function App() {
         .then((res) => {
           localStorage.setItem('allSavedMovies', JSON.stringify(res));
           setAllSavedMovies(res);
-          console.log('обращение и установка');
-          // переделать
           setCardSavedMoviesDisplay(res);
         })
         .catch((err) => {
@@ -313,6 +310,7 @@ function App() {
       .catch((err) => {
         setIsError(true);
         setIsInfoMessage(alertErrorMessage(err));
+        signOut();
         openPopup();
       })
       .finally(() => {

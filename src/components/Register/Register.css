@@ -1,0 +1,166 @@
+.register-page {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 396px;
+  align-items: flex-start;
+  margin: 0 auto;
+  min-height: 100vh;
+  height: 100%;
+  justify-content: center;
+  padding: 70px 0;
+}
+
+.register-page__title {
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 500;
+  margin-block: 0;
+  margin: 40px 0;
+}
+
+.form-register {
+  margin-bottom: 16px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-register__label {
+  display: block;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+  min-height: 88px;
+  color: #a0a0a0;
+}
+
+.form-register__input {
+  margin: 10px 0 8px;
+  width: 100%;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 400;
+  height: 46px;
+  border: none;
+  border-radius: 8px;
+  background: #f9f9f9;
+  padding: 0 15px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.form-register__submit {
+  width: 100%;
+  background: #000;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  border-radius: 3px;
+  color: #fff;
+  min-height: 45px;
+  cursor: pointer;
+  transition: opacity .4s linear;
+  padding: 0;
+  border: none;
+}
+
+.form-register__submit:hover {
+  opacity: .8;
+}
+
+.form-register__submit:focus-visible {
+  outline: 2px solid #2BE080;
+  outline-offset: 2px;
+}
+
+.form-register__submit:disabled {
+  opacity: .6;
+}
+
+.form-register__error {
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+  color: #ff4062;
+}
+
+.form-register__error-serv {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  color: #ff4062;
+  margin: 38px 0 20px;
+  min-height: 12px;
+  width: 100%;
+  text-align: center;
+}
+
+.register-page__text {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  color: #a0a0a0;
+  margin-block: 0;
+  width: 100%;
+  text-align: center;
+
+}
+
+.register-page__link {
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 400;
+  color: #000;
+  text-decoration: none;
+  margin-left: 6px;
+  transition: opacity .4s linear;
+}
+
+.register-page__link:hover {
+  opacity: .8;
+}
+
+.register-page__link:focus-visible {
+  outline: 2px solid #2BE080;
+}
+
+@media screen and (max-width: 767px) {
+
+  .register-page {
+    align-items: center;
+    padding: 56px 30px 30px;
+    justify-content: normal;
+  }
+
+  .register-page__title {
+    margin: 50px 0 80px;
+  }
+
+  .form-register {
+    margin-bottom: 14px;
+    flex-grow: 1;
+  }
+
+  .form-register__label:last-of-type {
+    margin-bottom: auto;
+  }
+
+  .form-register__submit {
+    font-size: 12px;
+    line-height: 17px;
+    /* margin-top: 80px; */
+  }
+
+  .register-page__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register-page__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

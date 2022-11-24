@@ -203,12 +203,6 @@ function App() {
     }
   }, [isLogin]);
 
-  // React.useEffect(() => {
-  //   if (localStorage.allSavedMovies) {
-  //     setCardSavedMoviesDisplay(JSON.parse(localStorage.allSavedMovies));
-  //   }
-  // }, [allSavedMovies]);
-
   const handleSearchMovies = (valueSearch) => {
     if (!localStorage.allMovies) {
       getAllMovies()

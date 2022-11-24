@@ -22,19 +22,6 @@ function SearchForm({
       const localSearch = localStorage.getItem('valueSearch');
       if (localSearch) {
         setValues({ search: localSearch });
-        // setIsValid(!isValid);
-        // return;
-      }
-    }
-  }, []);
-
-  React.useEffect(() => {
-    if (!savedMoviePage) {
-      const localSearch = localStorage.getItem('valueSearch');
-      if (localSearch) {
-        setValues({ search: localSearch });
-        // setIsValid(!isValid);
-        // return;
       }
     }
   }, []);

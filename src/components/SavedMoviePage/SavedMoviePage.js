@@ -14,10 +14,11 @@ function SavedMoviePage({
   allSavedMovies,
   setMovie,
   setDuration,
+  renderInfoMessage,
 }) {
   React.useEffect(() => {
     setMovie();
-  }, [allSavedMovies]);
+  }, []);
 
   React.useEffect(() => {
     setDuration();
@@ -33,6 +34,7 @@ function SavedMoviePage({
           searchMovies={searchMovies}
           changeDuration={changeDuration}
           isShort={isShort}
+          renderInfoMessage={renderInfoMessage}
         />
         <MovieCardList
           isSavedMovies={allSavedMovies}

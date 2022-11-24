@@ -21,4 +21,19 @@ export const MESSAGE_VALIDATION_NAME = 'Буквы, цифры и дефис. О
 
 export const DURATION_SHORT = 40;
 
+export const DEVISE_WIDE = 1280;
+export const DEVISE_NO_VERY_WIDE = 929;
+export const DEVISE_NOT_WIDE = 639;
+
+export const START_WIDE = 12;
+export const START_WIDE_STEP = 4;
+export const START_NO_VERY_WIDE = 9;
+export const START_NO_VERY_WIDE_STEP = 3;
+export const START_NOT_VERY_SMALL_WIDTH = 8;
+export const START_NOT_VERY_SMALL_WIDTH_STEP = 2;
+export const START_SMALL_WIDTH = 5;
+export const START_SMALL_WIDTH_STEP = 2;
+
+// device
+
 export const MESSAGE_UPDATE_USER = 'Данные успешно обновлены.';

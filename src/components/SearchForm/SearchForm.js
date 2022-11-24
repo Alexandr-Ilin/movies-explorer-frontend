@@ -1,46 +1,48 @@
 import './SearchForm.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import useForm from '../../utils/useForm';
+// import SavedMoviePage from '../SavedMoviePage/SavedMoviePage';
+// import alertErrorMessage from '../../utils/utils';
 
-function SearchForm({ searchMovies, changeDuration, isShort }) {
+function SearchForm({
+  searchMovies, changeDuration, isShort, renderInfoMessage,
+}) {
   const {
-    values, handleChange, errors, isValid, setValues, setIsValid,
+    values, handleChange, errors, setValues,
   } = useForm();
 
   const currentPath = useLocation().pathname;
   const savedMoviePage = currentPath !== '/movies';
+
+  const [shortSearch, setShortSearch] = useState(false);
 
   React.useEffect(() => {
     if (!savedMoviePage) {
       const localSearch = localStorage.getItem('valueSearch');
       if (localSearch) {
         setValues({ search: localSearch });
-        setIsValid(!isValid);
-        return;
       }
-      setIsValid(isValid);
     }
-
-    // const localSearch = localStorage.getItem('valueSearchSaved');
-    // if (localSearch) {
-    //   setValues({ searchSavedMovies: localSearch });
-    //   setIsValid(!isValid);
-    //   return;
-    // }
-    // setIsValid(isValid);
   }, []);
 
   function handleSubmit(evt) {
     evt.preventDefault();
-
+    if (!values.search && !values.searchSavedMovies && !shortSearch) {
+      const error = true;
+      renderInfoMessage({ message: 'Введите ключевое слово' }, error);
+      return;
+    }
+    setShortSearch(!shortSearch);
     searchMovies(currentPath === '/movies' ? values.search : values.searchSavedMovies, savedMoviePage);
   }
 
-  function handleClick(evt) {
-    changeDuration(savedMoviePage, () => {
-      handleSubmit(evt);
-    });
+  function handleClick() {
+    if (!savedMoviePage && !values.search) {
+      return;
+    }
+    setShortSearch(true);
+    changeDuration(savedMoviePage);
   }
 
   return (
@@ -54,7 +56,7 @@ function SearchForm({ searchMovies, changeDuration, isShort }) {
             name={currentPath === '/movies' ? 'search' : 'searchSavedMovies'}
             value={currentPath === '/movies' ? values.search || '' : values.searchSavedMovies || ''}
             onChange={handleChange}
-            required
+            // required
           />
           <span className="search-form__error">{!savedMoviePage ? errors.search : errors.searchSavedMovies}</span>
           <button

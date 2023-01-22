@@ -1,8 +1,9 @@
 # movies-explorer-frontend
 
-### Фронтенд (вёрстка) проекта Movie-Express
+### Фронтенд (вёрстка) проекта Movie-Express  
 
+**Описание:**  
+Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.  
+
+#### [Серверная часть](https://github.com/Alexandr-Ilin/movies-explorer-api)
 #### [https://disk.yandex.ru/d/0YaKmi36SnKRFg - ссылка на макет](https://disk.yandex.ru/d/0YaKmi36SnKRFg)
-#### [https://diplom.ilin.nomoredomains.sbs - ссылка на облако фронтенд](https://diplom.ilin.nomoredomains.sbs)
-#### [https://api.diplom.ilin.nomoredomains.sbs - ссылка на облако бекэнд](https://api.diplom.ilin.nomoredomains.sbs)
-#### [https://github.com/Alexandr-Ilin/movies-explorer-frontend/pull/2 - ссылка на Pull request](https://github.com/Alexandr-Ilin/movies-explorer-frontend/pull/2)

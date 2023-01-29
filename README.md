@@ -7,4 +7,4 @@
 
 #### [Серверная часть](https://github.com/Alexandr-Ilin/movies-explorer-api)
 #### [https://disk.yandex.ru/d/0YaKmi36SnKRFg - ссылка на макет](https://disk.yandex.ru/d/0YaKmi36SnKRFg)
-#### [Ссылка на проект](https://alexandr-ilin.github.io/movies-explorer-frontend/ "Дипломная работа")
+#### [Ссылка на проект](https://alexandr-ilin.github.io/movies-explorer-frontend/ "Дипломная работа"){:target="_blank"}

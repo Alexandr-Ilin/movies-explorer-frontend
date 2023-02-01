@@ -44,12 +44,17 @@
   margin-block: 0;
   margin-bottom: 26px;
 }
+
 .about-me__description {
   font-size: 14px;
   line-height: 22px;
   font-weight: 400;
   margin-block: 0;
   margin-bottom: 99px;
+}
+
+.about-me__description-text {
+  margin-block: 0;
 }
 
 .about-me__foto {
